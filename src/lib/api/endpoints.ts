@@ -9,10 +9,12 @@ export const endpoints = {
   relatedProducts: (slug: string) => `/v1/store/products/${slug}/related`,
   facets: "/v1/store/products/facets",
   collections: "/v1/store/collections",
+  categories: "/v1/store/categories",
   collection: (slug: string) => `/v1/store/collections/${slug}`,
   brands: "/v1/store/brands",
   brand: (slug: string) => `/v1/store/brands/${slug}`,
   brandShowcases: "/v1/store/brands/showcases",
+  brandCollections: (slug: string) => `/v1/store/brands/${slug}/collections`,
   auth: {
     requestOtp: "/v1/store/auth/otp",
     verifyOtp: "/v1/store/auth/otp/verify",

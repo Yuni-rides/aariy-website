@@ -33,7 +33,7 @@ export default async function BrandPage({ params, searchParams }: PageProps<"/br
 
   return (
     <>
-      <BrandHero brand={brand} />
+      <BrandHero brand={brand} active="products" />
       <Suspense fallback={<ProductListingSkeleton />}>
         <ProductListing basePath={routes.brand(slug)} searchParams={searchParams} scope={{ brand: slug }} />
       </Suspense>

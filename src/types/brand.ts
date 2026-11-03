@@ -1,3 +1,4 @@
+import type { Collection } from "./collection";
 import type { ImageAsset } from "./common";
 import type { ProductSummary } from "./product";
 
@@ -27,4 +28,12 @@ export type Brand = BrandSummary & {
 export type BrandShowcase = {
   brand: Brand;
   products: ProductSummary[];
+};
+
+/** A collection as it appears inside one brand's store ("Kurtas · 12 items"). */
+export type BrandCollection = {
+  collection: Pick<Collection, "slug" | "title">;
+  productCount: number;
+  /** First product's photo, used as the card image. */
+  image?: ImageAsset;
 };

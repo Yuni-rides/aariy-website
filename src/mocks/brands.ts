@@ -1,6 +1,5 @@
 import type { Brand } from "@/types";
 
-const logo = (name: string) => ({ url: "/images/placeholders/brand.svg", alt: `${name} logo`, width: 200, height: 200 });
 // Every brand reuses the Maria B Figma banner until real artwork arrives.
 const banner = (name: string) => ({ url: "/images/brands/maria-b/banner.webp", alt: `${name} collection`, width: 1467, height: 700 });
 // Portrait crops of the same banner, alternating per brand.
@@ -35,7 +34,6 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: ratings[0],
     cover: cover(BRAND_NAMES[0], 0),
-    logo: logo("Maria B"),
     banner: banner("Maria B"),
   },
   {
@@ -49,7 +47,6 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: ratings[1],
     cover: cover(BRAND_NAMES[1], 1),
-    logo: logo("Mehr Studio"),
     banner: banner("Mehr Studio"),
   },
   {
@@ -63,7 +60,6 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: ratings[2],
     cover: cover(BRAND_NAMES[2], 2),
-    logo: logo("Rang Ghar"),
     banner: banner("Rang Ghar"),
   },
   {
@@ -77,7 +73,6 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: ratings[3],
     cover: cover(BRAND_NAMES[3], 3),
-    logo: logo("Saba Atelier"),
     banner: banner("Saba Atelier"),
   },
   {
@@ -91,7 +86,6 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: ratings[4],
     cover: cover(BRAND_NAMES[4], 4),
-    logo: logo("Kapra & Co"),
     banner: banner("Kapra & Co"),
   },
   {
@@ -105,7 +99,6 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: ratings[5],
     cover: cover(BRAND_NAMES[5], 5),
-    logo: logo("Noor Jahan"),
     banner: banner("Noor Jahan"),
   },
 ];

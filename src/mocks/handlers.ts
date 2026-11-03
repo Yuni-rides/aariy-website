@@ -1,5 +1,8 @@
-import type { Brand, BrandShowcase, Paginated, Product, ProductFacets, ProductFilters, ProductSummary } from "@/types";
+import type { Brand, BrandCollection, BrandShowcase, Paginated, Product, ProductFacets, ProductFilters, ProductSummary } from "@/types";
+import { descendantIds, findCategoryById } from "@/lib/categories";
 import { mockBrands } from "./brands";
+import { mockCategories } from "./categories";
+import { mockCollections } from "./collections";
 import { mockProducts } from "./products";
 
 /**
@@ -48,10 +51,17 @@ function matchesQuery(p: Product, q?: string): boolean {
     .every((term) => haystack.includes(term));
 }
 
+function matchesCategory(p: Product, id?: string): boolean {
+  if (!id) return true;
+  const entry = findCategoryById(mockCategories, id);
+  return entry ? descendantIds(entry.category).includes(p.categoryId) : false;
+}
+
 function baseFilter(filters: ProductFilters): Product[] {
   return mockProducts.filter(
     (p) =>
       matchesCollection(p, filters.collection) &&
+      matchesCategory(p, filters.category) &&
       (!filters.brand || p.brand.slug === filters.brand) &&
       matchesQuery(p, filters.q),
   );
@@ -147,4 +157,16 @@ export function listBrandShowcases({
     brand,
     products: listProducts({ brand: brand.slug, pageSize: productsPerBrand }).items,
   }));
+}
+
+/** Collections that hold at least one of the brand's products ("all" is the All products tab). */
+export function listBrandCollections(slug: string): BrandCollection[] {
+  const products = mockProducts.filter((p) => p.brand.slug === slug);
+  return mockCollections
+    .filter((c) => c.slug !== "all")
+    .map((c) => {
+      const matches = products.filter((p) => matchesCollection(p, c.slug));
+      return { collection: { slug: c.slug, title: c.title }, productCount: matches.length, image: matches[0]?.images[0] };
+    })
+    .filter((c) => c.productCount > 0);
 }

@@ -1,4 +1,3 @@
-import { categoryNav } from "@/config/navigation";
 import type { Collection } from "@/types";
 
 const image = (title: string) => ({ url: "/images/placeholders/category.svg", alt: title, width: 600, height: 800 });
@@ -143,25 +142,3 @@ export const mockCollections: Collection[] = [
   },
 ];
 
-/** Category-rail links without curated copy yet get a plain collection, so no menu link 404s. */
-const curated = new Set(mockCollections.map((c) => c.slug));
-const navLinks = categoryNav.flatMap((item) => [
-  item,
-  ...(item.children ?? []).flatMap((sub) => [
-    sub,
-    ...(sub.groups ?? []).flatMap((group) => [group, ...(group.items ?? [])]),
-  ]),
-]);
-for (const { label, href } of navLinks) {
-  const slug = href.replace(/^\/collections\//, "");
-  if (curated.has(slug)) continue;
-  curated.add(slug);
-  mockCollections.push({
-    id: `col_${slug.replace(/-/g, "_")}`,
-    slug,
-    title: label,
-    description: `${label} from Pakistan's verified fashion brands.`,
-    indexable: true,
-    image: image(label),
-  });
-}

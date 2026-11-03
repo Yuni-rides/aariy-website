@@ -29,6 +29,7 @@ export function FilterForm({ facets, params, total }: FilterFormProps) {
   return (
     <Form ref={formRef} action={pathname} scroll={false} className="flex flex-col gap-8" onChange={submit}>
       {typeof params.q === "string" && <input type="hidden" name="q" value={params.q} />}
+      {typeof params.collection === "string" && <input type="hidden" name="collection" value={params.collection} />}
 
       <div className="flex items-center justify-between gap-4 lg:flex-col lg:items-stretch">
         <p className="text-sm text-muted" aria-live="polite">

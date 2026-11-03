@@ -147,7 +147,13 @@ export const ChevronDownIcon = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export const ArrowLeftIcon = (p: SVGProps<SVGSVGElement>) => (
+export const ChevronRightIcon = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}>
+    <path d="m9 6 6 6-6 6" />
+  </svg>
+);
+
+export const ArrowLeftIcon =(p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}>
     <path d="M19 12H5M11 6l-6 6 6 6" />
   </svg>

@@ -55,6 +55,9 @@ export type Product = Omit<ProductSummary, "image" | "hoverImage" | "sizes"> & {
   sellerId: string;
   description: string;
   images: ImageAsset[];
+  /** Leaf of the category tree the brand filed this product under. */
+  categoryId: string;
+  /** Curated collections it belongs to (kurtas, new-in, …). */
   categorySlugs: string[];
   variants: ProductVariant[];
   sizeChart?: SizeChart;
@@ -68,6 +71,8 @@ export type SortOption = "newest" | "price-asc" | "price-desc";
 
 export type ProductFilters = {
   collection?: string;
+  /** Category id; matches products filed under it or any of its children. */
+  category?: string;
   brand?: string;
   q?: string;
   sizes?: string[];

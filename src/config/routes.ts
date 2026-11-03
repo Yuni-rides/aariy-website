@@ -1,8 +1,11 @@
 export const routes = {
   home: () => "/",
   collection: (slug: string) => `/collections/${slug}`,
+  /** Category tree page: /categories/women/clothing/eastern-ready-to-wear/pishwas */
+  category: (path: string[]) => `/categories/${path.join("/")}`,
   brands: () => "/brands",
   brand: (slug: string) => `/brands/${slug}`,
+  brandCollections: (slug: string) => `/brands/${slug}/collections`,
   product: (slug: string) => `/products/${slug}`,
   search: (q?: string) =>
     q ? `/search?q=${encodeURIComponent(q)}` : "/search",

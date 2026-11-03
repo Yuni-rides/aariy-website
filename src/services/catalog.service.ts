@@ -2,8 +2,9 @@ import { cacheLife, cacheTag } from "next/cache";
 import { useMocks } from "@/config/env";
 import { apiClient, cacheTags, endpoints, isNotFound } from "@/lib/api";
 import * as mock from "@/mocks/handlers";
+import { mockCategories } from "@/mocks/categories";
 import { mockCollections } from "@/mocks/collections";
-import type { Collection, Paginated, Product, ProductFacets, ProductFilters, ProductSummary } from "@/types";
+import type { Category, Collection, Paginated, Product, ProductFacets, ProductFilters, ProductSummary } from "@/types";
 
 /**
  * Catalogue reads. Every function is cached with 'use cache' and tagged,
@@ -80,4 +81,13 @@ export async function getCollectionBySlug(slug: string): Promise<Collection | nu
     if (isNotFound(error)) return null;
     throw error;
   }
+}
+
+/** The whole category tree (menu, category pages, breadcrumbs). Small enough to load in one call. */
+export async function getCategoryTree(): Promise<Category[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(cacheTags.categories);
+  if (useMocks) return mockCategories;
+  return apiClient.get(endpoints.categories);
 }

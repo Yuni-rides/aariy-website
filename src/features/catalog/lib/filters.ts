@@ -20,13 +20,14 @@ export const PRICE_RANGES = [
 export const PAGE_SIZE = 12;
 
 /** URL params that narrow a listing. Any of these makes the page noindex (SOW §3.11). */
-const FILTER_KEYS = ["size", "price", "sort"] as const;
+const FILTER_KEYS = ["collection", "size", "price", "sort"] as const;
 
 export function parseFilters(params: SearchParams): ProductFilters {
   const sort = (Array.isArray(params.sort) ? params.sort[0] : params.sort) as SortOption | undefined;
   const price = Array.isArray(params.price) ? params.price[0] : params.price;
   const [min, max] = (price ?? "").split("-");
   return {
+    collection: typeof params.collection === "string" ? params.collection : undefined,
     sizes: toArray(params.size),
     minPrice: min ? Number(min) * 100 : undefined,
     maxPrice: max ? Number(max) * 100 : undefined,

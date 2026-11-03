@@ -5,3 +5,4 @@ export type * from "./collection";
 export type * from "./cart";
 export type * from "./order";
 export type * from "./customer";
+export type * from "./category";

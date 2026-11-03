@@ -1,4 +1,3 @@
-import { categoryLeaves } from "@/config/navigation";
 import { seoPages } from "@/config/seo-pages";
 import {
   CategoryCircles,
@@ -10,8 +9,9 @@ import {
   TrendingStores,
   homeContent,
 } from "@/features/home";
+import { pictureLeaves } from "@/lib/categories";
 import { buildMetadata } from "@/lib/seo";
-import { listBrandShowcases, listProducts } from "@/services";
+import { getCategoryTree, listBrandShowcases, listProducts } from "@/services";
 
 export const metadata = buildMetadata({
   ...seoPages.home,
@@ -19,7 +19,8 @@ export const metadata = buildMetadata({
 });
 
 export default async function HomePage() {
-  const [heroSlides, trending, newIn] = await Promise.all([
+  const [categories, heroSlides, trending, newIn] = await Promise.all([
+    getCategoryTree(),
     listBrandShowcases({
       slugs: [...homeContent.heroBrandSlugs],
       productsPerBrand: 4,
@@ -34,7 +35,7 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col gap-14 pb-8 pt-4 md:gap-20">
       <div className="container-site grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-8">
-        <CategoryRail />
+        <CategoryRail categories={categories} />
         <HeroCarousel slides={heroSlides} />
       </div>
 
@@ -46,7 +47,7 @@ export default async function HomePage() {
         ))}
       </TrendingStores>
 
-      <CategoryCircles categories={categoryLeaves} />
+      <CategoryCircles categories={pictureLeaves(categories)} />
 
       <NewArrivals products={newIn.items} />
 

@@ -7,6 +7,7 @@ export const cacheTags = {
   products: "products",
   product: (slug: string) => `product:${slug}`,
   collections: "collections",
+  categories: "categories",
   collection: (slug: string) => `collection:${slug}`,
   brands: "brands",
   brand: (slug: string) => `brand:${slug}`,

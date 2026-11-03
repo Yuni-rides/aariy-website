@@ -5,9 +5,10 @@ import { JsonLd } from "@/components/seo";
 import { Breadcrumbs } from "@/components/ui";
 import { routes } from "@/config/routes";
 import { ProductGallery, ProductInfo, RelatedProducts } from "@/features/product";
+import { categoryCrumbs, findCategoryById } from "@/lib/categories";
 import { buildMetadata } from "@/lib/seo";
 import { productJsonLd } from "@/lib/structured-data";
-import { getProductBySlug, getProductSlugsForBuild } from "@/services";
+import { getCategoryTree, getProductBySlug, getProductSlugsForBuild } from "@/services";
 
 /** Prerender known products at build. New products render on first visit, then serve from cache. */
 export async function generateStaticParams() {
@@ -29,16 +30,18 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
 
 export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const [product, tree] = await Promise.all([getProductBySlug(slug), getCategoryTree()]);
   if (!product) notFound();
+  const entry = findCategoryById(tree, product.categoryId);
+  const trail = entry ? categoryCrumbs(entry.path) : [];
 
   return (
     <>
       <div className="container-site py-6">
         <Breadcrumbs
+          hideCurrent
           items={[
-            { name: "Home", href: routes.home() },
-            { name: product.brand.name, href: routes.brand(product.brand.slug) },
+            ...(trail.length ? trail : [{ name: "Home", href: routes.home() }]),
             { name: product.name, href: routes.product(product.slug) },
           ]}
         />

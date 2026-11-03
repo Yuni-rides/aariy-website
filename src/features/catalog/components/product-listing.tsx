@@ -10,8 +10,8 @@ import { Pagination } from "./pagination";
 type ProductListingProps = {
   basePath: string;
   searchParams: Promise<SearchParams>;
-  /** Fixed scope of the listing, e.g. a collection or brand. URL filters are applied on top. */
-  scope: Pick<ProductFilters, "collection" | "brand">;
+  /** Fixed scope of the listing, e.g. a collection, category or brand. URL filters are applied on top. */
+  scope: Pick<ProductFilters, "collection" | "brand" | "category">;
 };
 
 /**

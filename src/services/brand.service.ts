@@ -2,7 +2,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import { useMocks } from "@/config/env";
 import { apiClient, cacheTags, endpoints, isNotFound } from "@/lib/api";
 import * as mock from "@/mocks/handlers";
-import type { Brand, BrandShowcase } from "@/types";
+import type { Brand, BrandCollection, BrandShowcase } from "@/types";
 
 export async function listBrands(): Promise<Brand[]> {
   "use cache";
@@ -41,4 +41,13 @@ export async function listBrandShowcases(options: {
   return apiClient.get(endpoints.brandShowcases, {
     query: { slugs: options.slugs, productsPerBrand: options.productsPerBrand, limit: options.limit },
   });
+}
+
+/** Collections inside one brand's store, for its Collections tab. */
+export async function listBrandCollections(slug: string): Promise<BrandCollection[]> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(cacheTags.brand(slug), cacheTags.products);
+  if (useMocks) return mock.listBrandCollections(slug);
+  return apiClient.get(endpoints.brandCollections(slug));
 }

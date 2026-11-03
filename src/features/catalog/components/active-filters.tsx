@@ -9,7 +9,11 @@ export function ActiveFilters({ basePath, params }: { basePath: string; params: 
 
   const sizes = toArray(params.size);
   const price = typeof params.price === "string" ? params.price : undefined;
+  const collection = typeof params.collection === "string" ? params.collection : undefined;
   const chips = [
+    ...(collection
+      ? [{ label: collection.replace(/-/g, " "), href: basePath + buildQuery(params, { collection: undefined, page: undefined }) }]
+      : []),
     ...sizes.map((s) => ({
       label: `Size ${s}`,
       href: basePath + buildQuery(params, { size: sizes.filter((x) => x !== s), page: undefined }),
@@ -26,7 +30,7 @@ export function ActiveFilters({ basePath, params }: { basePath: string; params: 
           key={chip.label}
           href={chip.href}
           scroll={false}
-          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-xs hover:border-ink"
+          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-xs capitalize hover:border-ink"
         >
           {chip.label}
           <CloseIcon width={12} height={12} />

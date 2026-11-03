@@ -1,5 +1,7 @@
 import type { Product, SizeChart } from "@/types";
+import { findCategoryById } from "@/lib/categories";
 import { mockBrands } from "./brands";
+import { mockCategories } from "./categories";
 
 const SIZES = ["XS", "S", "M", "L", "XL"];
 
@@ -25,11 +27,16 @@ type Seed = {
   occasion: string;
 };
 
-const CATEGORY_LABELS: Record<Seed["category"], string> = {
-  kurtas: "Kurtas",
-  "co-ord-sets": "Co-ord sets",
-  formals: "Formals",
-  bottoms: "Bottoms",
+/** Leaf each seed is filed under in the category tree (mocks/categories.ts). */
+const LEAF: Record<string, string> = {
+  "Block Print Lawn Kurta": "cat_women_clothing_eastern-ready-to-wear_kurta-set",
+  "Embroidered Neckline Kurta": "cat_women_clothing_eastern-ready-to-wear_kurta-set",
+  "Straight Khaddar Kurta": "cat_women_clothing_eastern-ready-to-wear_kaftan",
+  "Linen Co-ord Set": "cat_women_clothing_western_co-ords",
+  "Printed Two Piece": "cat_women_clothing_eastern-ready-to-wear_sharara",
+  "Festive Organza Formal": "cat_women_clothing_eastern-ready-to-wear_pishwas",
+  "Hand Embellished Chiffon Formal": "cat_women_clothing_eastern-ready-to-wear_lehenga",
+  "Straight Cotton Trousers": "cat_women_clothing_fusion",
 };
 
 const seeds: Seed[] = [
@@ -59,7 +66,8 @@ export const mockProducts: Product[] = mockBrands.flatMap((brand, b) =>
   [0, 1, 2, 3].map((i): Product => {
     const seed = seeds[(b * 3 + i) % seeds.length];
     const n = b * 4 + i + 1;
-    const { audience, color } = IMAGES[(i + b) % IMAGES.length];
+    const { audience, color, file } = IMAGES[(i + b) % IMAGES.length];
+    const categoryId = audience === "kids" ? (file.includes("girl") ? "cat_kids_girls" : "cat_kids_boys") : LEAF[seed.name];
     const created = new Date(Date.UTC(2026, 9, 30 - n)).toISOString();
     return {
       id: `prd_${String(n).padStart(3, "0")}`,
@@ -79,9 +87,10 @@ export const mockProducts: Product[] = mockBrands.flatMap((brand, b) =>
           height: 272,
         };
       }),
+      categoryId,
       categorySlugs: audience === "kids" ? ["kids", seed.category] : ["ready-to-wear", seed.category],
       audience,
-      category: CATEGORY_LABELS[seed.category],
+      category: findCategoryById(mockCategories, categoryId)?.category.name ?? "",
       fabric: seed.fabric,
       color,
       occasion: seed.occasion,
