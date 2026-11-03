@@ -1,9 +1,11 @@
 import type { Brand } from "@/types";
 
 const logo = (name: string) => ({ url: "/images/placeholders/brand.svg", alt: `${name} logo`, width: 200, height: 200 });
-const banner = (name: string) => ({ url: "/images/placeholders/banner.svg", alt: `${name} collection`, width: 1600, height: 600 });
+// Every brand reuses the Maria B Figma banner until real artwork arrives.
+const banner = (name: string) => ({ url: "/images/brands/maria-b/banner.webp", alt: `${name} collection`, width: 1467, height: 700 });
+// Portrait crops of the same banner, alternating per brand.
 const cover = (name: string, i: number) => ({
-  url: `/images/placeholders/store-${(i % 4) + 1}.svg`,
+  url: `/images/brands/maria-b/store-cover-${(i % 2) + 1}.webp`,
   alt: `${name} campaign`,
   width: 500,
   height: 700,
@@ -17,24 +19,24 @@ const ratings = [
   { average: 4.6, count: 157000 },
 ];
 
-const BRAND_NAMES = ["Zara Noor", "Mehr Studio", "Rang Ghar", "Saba Atelier", "Kapra & Co", "Noor Jahan"];
+const BRAND_NAMES = ["Maria B", "Mehr Studio", "Rang Ghar", "Saba Atelier", "Kapra & Co", "Noor Jahan"];
 
 /** Placeholder brands for the static phase. Replaced by /v1/store/brands. */
 export const mockBrands: Brand[] = [
   {
     id: "br_01",
-    slug: "zara-noor",
-    name: "Zara Noor",
+    slug: "maria-b",
+    name: "Maria B",
     verified: true,
-    tagline: "Everyday lawn, made in Lahore.",
+    tagline: "Luxury pret and festive wear.",
     story:
-      "Zara Noor started as a small studio in Lahore making hand-finished lawn kurtas for friends and family. Today the label works with local artisans on block prints and thread work.",
+      "Maria B designs ready-to-wear and festive collections with signature embroidery, for women and kids.",
     city: "Lahore",
     productCount: 0,
     rating: ratings[0],
     cover: cover(BRAND_NAMES[0], 0),
-    logo: logo("Zara Noor"),
-    banner: banner("Zara Noor"),
+    logo: logo("Maria B"),
+    banner: banner("Maria B"),
   },
   {
     id: "br_02",

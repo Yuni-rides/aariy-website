@@ -164,3 +164,17 @@ export const StarIcon = (p: SVGProps<SVGSVGElement>) => (
     <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9L12 3Z" />
   </svg>
 );
+
+export const FilterIcon = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}>
+    <path d="M4 5h16l-6 7.5V19l-4-2v-4.5L4 5Z" />
+  </svg>
+);
+
+export const ImageSearchIcon = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}>
+    <rect x="3" y="5" width="18" height="14" rx="3" />
+    <circle cx="15.5" cy="10" r="2" />
+    <path d="m3 16 5-4 4 3" />
+  </svg>
+);

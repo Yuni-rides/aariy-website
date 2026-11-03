@@ -21,25 +21,45 @@ type Seed = {
   price: number;
   compareAt?: number;
   material: string;
+  fabric: string;
+  occasion: string;
+};
+
+const CATEGORY_LABELS: Record<Seed["category"], string> = {
+  kurtas: "Kurtas",
+  "co-ord-sets": "Co-ord sets",
+  formals: "Formals",
+  bottoms: "Bottoms",
 };
 
 const seeds: Seed[] = [
-  { name: "Block Print Lawn Kurta", category: "kurtas", price: 4990, material: "100% cotton lawn" },
-  { name: "Embroidered Neckline Kurta", category: "kurtas", price: 6490, compareAt: 7990, material: "Cotton cambric" },
-  { name: "Straight Khaddar Kurta", category: "kurtas", price: 5590, material: "Khaddar" },
-  { name: "Linen Co-ord Set", category: "co-ord-sets", price: 8990, material: "Linen blend" },
-  { name: "Printed Two Piece", category: "co-ord-sets", price: 7490, compareAt: 9490, material: "Cotton lawn" },
-  { name: "Festive Organza Formal", category: "formals", price: 18990, material: "Organza with silk lining" },
-  { name: "Hand Embellished Chiffon Formal", category: "formals", price: 24990, material: "Chiffon" },
-  { name: "Straight Cotton Trousers", category: "bottoms", price: 2990, material: "Cotton" },
+  { name: "Block Print Lawn Kurta", category: "kurtas", price: 4990, material: "100% cotton lawn", fabric: "Lawn", occasion: "Everyday" },
+  { name: "Embroidered Neckline Kurta", category: "kurtas", price: 6490, compareAt: 7990, material: "Cotton cambric", fabric: "Cambric", occasion: "Everyday" },
+  { name: "Straight Khaddar Kurta", category: "kurtas", price: 5590, material: "Khaddar", fabric: "Khaddar", occasion: "Everyday" },
+  { name: "Linen Co-ord Set", category: "co-ord-sets", price: 8990, material: "Linen blend", fabric: "Linen", occasion: "Semi-formal" },
+  { name: "Printed Two Piece", category: "co-ord-sets", price: 7490, compareAt: 9490, material: "Cotton lawn", fabric: "Lawn", occasion: "Everyday" },
+  { name: "Festive Organza Formal", category: "formals", price: 18990, material: "Organza with silk lining", fabric: "Organza", occasion: "Festive" },
+  { name: "Hand Embellished Chiffon Formal", category: "formals", price: 24990, material: "Chiffon", fabric: "Chiffon", occasion: "Wedding" },
+  { name: "Straight Cotton Trousers", category: "bottoms", price: 2990, material: "Cotton", fabric: "Cotton", occasion: "Everyday" },
 ];
+
+/** Figma product shots, in hero order; every brand reuses them for now. */
+const IMAGES = [
+  { file: "green-embroidered-dress", alt: "Green embroidered dress", audience: "women", color: "Green" },
+  { file: "kids-girl-purple-dress", alt: "Girls' purple dress", audience: "kids", color: "Purple" },
+  { file: "kids-boy-black-kurta", alt: "Boys' black kurta", audience: "kids", color: "Black" },
+  { file: "women-pink-printed-suit", alt: "Pink printed suit", audience: "women", color: "Pink" },
+] as const;
+
+/** Prices shown on the Figma hero tiles (first brand). */
+const FIGMA_PRICES = [11000, 3000, 4000, 7000];
 
 /** 6 brands × 4 products = 24 placeholder products. Replaced by /v1/store/products. */
 export const mockProducts: Product[] = mockBrands.flatMap((brand, b) =>
   [0, 1, 2, 3].map((i): Product => {
     const seed = seeds[(b * 3 + i) % seeds.length];
     const n = b * 4 + i + 1;
-    const imageIndex = (n % 6) + 1;
+    const { audience, color } = IMAGES[(i + b) % IMAGES.length];
     const created = new Date(Date.UTC(2026, 9, 30 - n)).toISOString();
     return {
       id: `prd_${String(n).padStart(3, "0")}`,
@@ -48,15 +68,24 @@ export const mockProducts: Product[] = mockBrands.flatMap((brand, b) =>
       sellerId: brand.id,
       brand: { id: brand.id, slug: brand.slug, name: brand.name, logo: brand.logo, verified: brand.verified },
       description: `${seed.name} by ${brand.name}. ${brand.tagline} Cut for an easy fit and finished with care, ready to wear straight out of the bag.`,
-      price: { amount: (seed.price + b * 200) * 100, currency: "PKR" },
-      compareAtPrice: seed.compareAt ? { amount: (seed.compareAt + b * 200) * 100, currency: "PKR" } : undefined,
-      images: [1, 2, 3].map((k) => ({
-        url: `/images/placeholders/product-${((imageIndex + k - 2) % 6) + 1}.svg`,
-        alt: `${seed.name} by ${brand.name}, view ${k}`,
-        width: 600,
-        height: 800,
-      })),
-      categorySlugs: ["ready-to-wear", seed.category],
+      price: { amount: (b === 0 ? FIGMA_PRICES[i] : seed.price + b * 200) * 100, currency: "PKR" },
+      compareAtPrice: seed.compareAt && b !== 0 ? { amount: (seed.compareAt + b * 200) * 100, currency: "PKR" } : undefined,
+      images: [0, 1, 2].map((k) => {
+        const image = IMAGES[(i + k + b) % IMAGES.length];
+        return {
+          url: `/images/brands/maria-b/${image.file}.png`,
+          alt: `${image.alt} by ${brand.name}`,
+          width: 272,
+          height: 272,
+        };
+      }),
+      categorySlugs: audience === "kids" ? ["kids", seed.category] : ["ready-to-wear", seed.category],
+      audience,
+      category: CATEGORY_LABELS[seed.category],
+      fabric: seed.fabric,
+      color,
+      occasion: seed.occasion,
+      rating: { average: [4.5, 4.3, 4.8, 4.6, 4.4][n % 5], count: 20 + ((n * 17) % 90) },
       variants: SIZES.map((size, s) => ({
         id: `var_${n}_${size}`,
         sku: `${brand.slug.slice(0, 3).toUpperCase()}-${n}-${size}`,

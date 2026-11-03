@@ -8,7 +8,7 @@ import "./globals.css";
 
 // Fonts are self-hosted by next/font: no layout shift, no third-party request at runtime.
 // Outfit matches the Figma design (logo, nav, headings, body).
-const body = Outfit({ variable: "--font-body", subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap" });
+const body = Outfit({ variable: "--font-body", subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

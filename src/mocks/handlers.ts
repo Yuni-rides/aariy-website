@@ -20,6 +20,13 @@ export function toSummary(p: Product): ProductSummary {
     hoverImage: p.images[1],
     isNew: p.isNew,
     inStock: p.variants.some((v) => v.stock > 0),
+    audience: p.audience,
+    rating: p.rating,
+    category: p.category,
+    fabric: p.fabric,
+    color: p.color,
+    occasion: p.occasion,
+    sizes: p.variants.filter((v) => v.stock > 0).map((v) => v.size),
   };
 }
 

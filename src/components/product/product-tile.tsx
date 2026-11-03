@@ -11,6 +11,8 @@ type ProductTileProps = {
   sizes: string;
   priority?: boolean;
   size?: "md" | "sm";
+  /** Store cards in the Figma show tiles without a heart. */
+  showWishlist?: boolean;
   className?: string;
 };
 
@@ -19,7 +21,7 @@ type ProductTileProps = {
  * pill bottom-left. Used in the home hero and trending store cards.
  * The link covers the tile; the heart sits above it (no button inside <a>).
  */
-export function ProductTile({ product, sizes, priority, size = "md", className }: ProductTileProps) {
+export function ProductTile({ product, sizes, priority, size = "md", showWishlist = true, className }: ProductTileProps) {
   return (
     <article className={cn("group relative overflow-hidden rounded-card bg-surface", className)}>
       <Image
@@ -35,12 +37,14 @@ export function ProductTile({ product, sizes, priority, size = "md", className }
           {product.name} by {product.brand.name}, {formatMoney(product.price)}
         </span>
       </Link>
-      <WishlistButton product={product} className={cn("absolute right-1.5 top-1.5", size === "sm" && "size-6")} />
+      {showWishlist && (
+        <WishlistButton product={product} className={cn("absolute right-1.5 top-1.5", size === "sm" && "size-6")} />
+      )}
       <span
         aria-hidden
         className={cn(
-          "pointer-events-none absolute bottom-2 left-2 rounded-full bg-accent font-medium text-accent-ink",
-          size === "md" ? "px-3 py-1 text-[11px]" : "px-2 py-0.5 text-[9px]",
+          "pointer-events-none absolute rounded-full bg-accent font-medium text-accent-ink",
+          size === "md" ? "bottom-2.5 left-2.5 px-3 py-1.5 text-xs" : "bottom-1.5 left-1.5 px-2 py-0.5 text-[10px]",
         )}
       >
         {formatMoney(product.price)}

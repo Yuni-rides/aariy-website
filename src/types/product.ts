@@ -23,6 +23,11 @@ export type DispatchPromise = {
   maxDays: number;
 };
 
+/** Who a product is for; drives the Men / Women / Kids tabs on the home page. */
+export type Audience = "women" | "men" | "kids";
+
+export type ProductRating = { average: number; count: number };
+
 /** Lightweight shape used in grids and cards. */
 export type ProductSummary = {
   id: string;
@@ -35,9 +40,18 @@ export type ProductSummary = {
   hoverImage?: ImageAsset;
   isNew: boolean;
   inStock: boolean;
+  audience: Audience;
+  rating?: ProductRating;
+  /** Facets for the home "Trending products" filter chips. */
+  category: string;
+  fabric: string;
+  color: string;
+  occasion: string;
+  /** Sizes currently in stock. */
+  sizes: string[];
 };
 
-export type Product = Omit<ProductSummary, "image" | "hoverImage"> & {
+export type Product = Omit<ProductSummary, "image" | "hoverImage" | "sizes"> & {
   sellerId: string;
   description: string;
   images: ImageAsset[];

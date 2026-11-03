@@ -4,6 +4,6 @@
  */
 export const homeContent = {
   /** Brands shown in the hero carousel, in order. */
-  heroBrandSlugs: ["zara-noor", "saba-atelier", "noor-jahan"],
+  heroBrandSlugs: ["maria-b", "saba-atelier", "noor-jahan"],
   trendingStoresLimit: 8,
 } as const;
