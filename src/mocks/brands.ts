@@ -1,14 +1,17 @@
 import type { Brand } from "@/types";
 
-// Every brand reuses the Maria B Figma banner until real artwork arrives.
-const banner = (name: string) => ({ url: "/images/brands/maria-b/banner.webp", alt: `${name} collection`, width: 1467, height: 700 });
-// Portrait crops of the same banner, alternating per brand.
-const cover = (name: string, i: number) => ({
-  url: `/images/brands/maria-b/store-cover-${(i % 2) + 1}.webp`,
-  alt: `${name} campaign`,
-  width: 500,
+const OWN_ART = new Set(["maria-b", "noor-jahan", "saba-atelier"]);
+
+const banner = (slug: string, name: string) => ({
+  url: `/images/brands/${OWN_ART.has(slug) ? slug : "maria-b"}/banner.webp`,
+  alt: `${name} collection`,
+  width: 1467,
   height: 700,
 });
+const cover = (slug: string, name: string, i: number) =>
+  OWN_ART.has(slug) && slug !== "maria-b"
+    ? { url: `/images/brands/${slug}/store-cover.png`, alt: `${name} campaign`, width: 377, height: 529 }
+    : { url: `/images/brands/maria-b/store-cover-${(i % 2) + 1}.webp`, alt: `${name} campaign`, width: 500, height: 700 };
 const ratings = [
   { average: 4.5, count: 591000 },
   { average: 4.7, count: 128000 },
@@ -18,9 +21,15 @@ const ratings = [
   { average: 4.6, count: 157000 },
 ];
 
-const BRAND_NAMES = ["Maria B", "Mehr Studio", "Rang Ghar", "Saba Atelier", "Kapra & Co", "Noor Jahan"];
+const BRAND_NAMES = [
+  "Maria B",
+  "Mehr Studio",
+  "Rang Ghar",
+  "Saba Atelier",
+  "Kapra & Co",
+  "Noor Jahan",
+];
 
-/** Placeholder brands for the static phase. Replaced by /v1/store/brands. */
 export const mockBrands: Brand[] = [
   {
     id: "br_01",
@@ -33,8 +42,8 @@ export const mockBrands: Brand[] = [
     city: "Lahore",
     productCount: 0,
     rating: ratings[0],
-    cover: cover(BRAND_NAMES[0], 0),
-    banner: banner("Maria B"),
+    cover: cover("maria-b", BRAND_NAMES[0], 0),
+    banner: banner("maria-b", "Maria B"),
   },
   {
     id: "br_02",
@@ -42,12 +51,13 @@ export const mockBrands: Brand[] = [
     name: "Mehr Studio",
     verified: true,
     tagline: "Modern co-ords for the city.",
-    story: "Mehr Studio designs relaxed co-ord sets that move from office to evening, in breathable cotton and linen blends.",
+    story:
+      "Mehr Studio designs relaxed co-ord sets that move from office to evening, in breathable cotton and linen blends.",
     city: "Karachi",
     productCount: 0,
     rating: ratings[1],
-    cover: cover(BRAND_NAMES[1], 1),
-    banner: banner("Mehr Studio"),
+    cover: cover("mehr-studio", BRAND_NAMES[1], 1),
+    banner: banner("mehr-studio", "Mehr Studio"),
   },
   {
     id: "br_03",
@@ -55,12 +65,13 @@ export const mockBrands: Brand[] = [
     name: "Rang Ghar",
     verified: true,
     tagline: "Colour, print and heritage craft.",
-    story: "Rang Ghar revives traditional dyeing techniques from Sindh and Punjab in contemporary silhouettes.",
+    story:
+      "Rang Ghar revives traditional dyeing techniques from Sindh and Punjab in contemporary silhouettes.",
     city: "Hyderabad",
     productCount: 0,
     rating: ratings[2],
-    cover: cover(BRAND_NAMES[2], 2),
-    banner: banner("Rang Ghar"),
+    cover: cover("rang-ghar", BRAND_NAMES[2], 2),
+    banner: banner("rang-ghar", "Rang Ghar"),
   },
   {
     id: "br_04",
@@ -68,12 +79,13 @@ export const mockBrands: Brand[] = [
     name: "Saba Atelier",
     verified: true,
     tagline: "Occasion formals, finished by hand.",
-    story: "Saba Atelier creates formal wear with hand embellishment for weddings and festive evenings.",
+    story:
+      "Saba Atelier creates formal wear with hand embellishment for weddings and festive evenings.",
     city: "Islamabad",
     productCount: 0,
     rating: ratings[3],
-    cover: cover(BRAND_NAMES[3], 3),
-    banner: banner("Saba Atelier"),
+    cover: cover("saba-atelier", BRAND_NAMES[3], 3),
+    banner: banner("saba-atelier", "Saba Atelier"),
   },
   {
     id: "br_05",
@@ -81,12 +93,13 @@ export const mockBrands: Brand[] = [
     name: "Kapra & Co",
     verified: true,
     tagline: "Essentials, cut well.",
-    story: "Kapra & Co focuses on wardrobe staples: straight trousers, simple kurtas and easy layers.",
+    story:
+      "Kapra & Co focuses on wardrobe staples: straight trousers, simple kurtas and easy layers.",
     city: "Faisalabad",
     productCount: 0,
     rating: ratings[4],
-    cover: cover(BRAND_NAMES[4], 4),
-    banner: banner("Kapra & Co"),
+    cover: cover("kapra-co", BRAND_NAMES[4], 4),
+    banner: banner("kapra-co", "Kapra & Co"),
   },
   {
     id: "br_06",
@@ -94,11 +107,12 @@ export const mockBrands: Brand[] = [
     name: "Noor Jahan",
     verified: true,
     tagline: "Festive wear with a quiet touch.",
-    story: "Noor Jahan makes festive pieces with subtle embroidery, designed for comfort through long celebrations.",
+    story:
+      "Noor Jahan makes festive pieces with subtle embroidery, designed for comfort through long celebrations.",
     city: "Multan",
     productCount: 0,
     rating: ratings[5],
-    cover: cover(BRAND_NAMES[5], 5),
-    banner: banner("Noor Jahan"),
+    cover: cover("noor-jahan", BRAND_NAMES[5], 5),
+    banner: banner("noor-jahan", "Noor Jahan"),
   },
 ];

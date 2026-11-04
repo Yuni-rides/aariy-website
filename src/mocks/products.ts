@@ -2,6 +2,7 @@ import type { Product, SizeChart } from "@/types";
 import { findCategoryById } from "@/lib/categories";
 import { mockBrands } from "./brands";
 import { mockCategories } from "./categories";
+import { mockRating } from "./reviews";
 
 const SIZES = ["XS", "S", "M", "L", "XL"];
 
@@ -50,13 +51,40 @@ const seeds: Seed[] = [
   { name: "Straight Cotton Trousers", category: "bottoms", price: 2990, material: "Cotton", fabric: "Cotton", occasion: "Everyday" },
 ];
 
-/** Figma product shots, in hero order; every brand reuses them for now. */
-const IMAGES = [
-  { file: "green-embroidered-dress", alt: "Green embroidered dress", audience: "women", color: "Green" },
-  { file: "kids-girl-purple-dress", alt: "Girls' purple dress", audience: "kids", color: "Purple" },
-  { file: "kids-boy-black-kurta", alt: "Boys' black kurta", audience: "kids", color: "Black" },
-  { file: "women-pink-printed-suit", alt: "Pink printed suit", audience: "women", color: "Pink" },
-] as const;
+type ProductImage = { file: string; alt: string; audience: "women" | "kids"; color: string };
+type ImageSet = { folder: string; size: number; images: ProductImage[] };
+
+/** Figma product shots, in hero order; brands without their own photos reuse these. */
+const DEFAULT_IMAGES: ImageSet = {
+  folder: "maria-b",
+  size: 272,
+  images: [
+    { file: "green-embroidered-dress", alt: "Green embroidered dress", audience: "women", color: "Green" },
+    { file: "kids-girl-purple-dress", alt: "Girls' purple dress", audience: "kids", color: "Purple" },
+    { file: "kids-boy-black-kurta", alt: "Boys' black kurta", audience: "kids", color: "Black" },
+    { file: "women-pink-printed-suit", alt: "Pink printed suit", audience: "women", color: "Pink" },
+  ],
+};
+
+/** Brands that sent their own product photos (public/images/brands/<slug>/). */
+const BRAND_IMAGES: Record<string, ImageSet> = {
+  "noor-jahan": {
+    folder: "noor-jahan",
+    size: 158,
+    images: [
+      { file: "brown-embroidered-dress", alt: "Brown embroidered dress", audience: "women", color: "Brown" },
+      { file: "pink-skin", alt: "Pink embroidered suit", audience: "women", color: "Pink" },
+    ],
+  },
+  "saba-atelier": {
+    folder: "saba-atelier",
+    size: 158,
+    images: [
+      { file: "black-dress", alt: "Black formal dress", audience: "women", color: "Black" },
+      { file: "pink-dress", alt: "Pink formal dress", audience: "women", color: "Pink" },
+    ],
+  },
+};
 
 /** Prices shown on the Figma hero tiles (first brand). */
 const FIGMA_PRICES = [11000, 3000, 4000, 7000];
@@ -66,7 +94,9 @@ export const mockProducts: Product[] = mockBrands.flatMap((brand, b) =>
   [0, 1, 2, 3].map((i): Product => {
     const seed = seeds[(b * 3 + i) % seeds.length];
     const n = b * 4 + i + 1;
-    const { audience, color, file } = IMAGES[(i + b) % IMAGES.length];
+    const set = BRAND_IMAGES[brand.slug] ?? DEFAULT_IMAGES;
+    const shots = set.images;
+    const { audience, color, file } = shots[(i + b) % shots.length];
     const categoryId = audience === "kids" ? (file.includes("girl") ? "cat_kids_girls" : "cat_kids_boys") : LEAF[seed.name];
     const created = new Date(Date.UTC(2026, 9, 30 - n)).toISOString();
     return {
@@ -78,13 +108,14 @@ export const mockProducts: Product[] = mockBrands.flatMap((brand, b) =>
       description: `${seed.name} by ${brand.name}. ${brand.tagline} Cut for an easy fit and finished with care, ready to wear straight out of the bag.`,
       price: { amount: (b === 0 ? FIGMA_PRICES[i] : seed.price + b * 200) * 100, currency: "PKR" },
       compareAtPrice: seed.compareAt && b !== 0 ? { amount: (seed.compareAt + b * 200) * 100, currency: "PKR" } : undefined,
-      images: [0, 1, 2].map((k) => {
-        const image = IMAGES[(i + k + b) % IMAGES.length];
+      // Up to three gallery shots, never the same photo twice.
+      images: Array.from({ length: Math.min(3, shots.length) }, (_, k) => {
+        const image = shots[(i + k + b) % shots.length];
         return {
-          url: `/images/brands/maria-b/${image.file}.png`,
+          url: `/images/brands/${set.folder}/${image.file}.png`,
           alt: `${image.alt} by ${brand.name}`,
-          width: 272,
-          height: 272,
+          width: set.size,
+          height: set.size,
         };
       }),
       categoryId,
@@ -94,7 +125,7 @@ export const mockProducts: Product[] = mockBrands.flatMap((brand, b) =>
       fabric: seed.fabric,
       color,
       occasion: seed.occasion,
-      rating: { average: [4.5, 4.3, 4.8, 4.6, 4.4][n % 5], count: 20 + ((n * 17) % 90) },
+      rating: mockRating(`prd_${String(n).padStart(3, "0")}`),
       variants: SIZES.map((size, s) => ({
         id: `var_${n}_${size}`,
         sku: `${brand.slug.slice(0, 3).toUpperCase()}-${n}-${size}`,

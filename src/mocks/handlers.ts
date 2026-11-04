@@ -1,9 +1,23 @@
-import type { Brand, BrandCollection, BrandShowcase, Paginated, Product, ProductFacets, ProductFilters, ProductSummary } from "@/types";
+import type {
+  Brand,
+  BrandCollection,
+  BrandShowcase,
+  Paginated,
+  Product,
+  ProductFacets,
+  ProductFilters,
+  ProductReview,
+  ProductSummary,
+  ReviewInput,
+  ReviewPage,
+  ReviewQuery,
+} from "@/types";
 import { descendantIds, findCategoryById } from "@/lib/categories";
 import { mockBrands } from "./brands";
 import { mockCategories } from "./categories";
 import { mockCollections } from "./collections";
 import { mockProducts } from "./products";
+import { addReview, hasReviewed, listReviews, mockRating } from "./reviews";
 
 /**
  * In-memory versions of the API's query logic. They return exactly the
@@ -169,4 +183,25 @@ export function listBrandCollections(slug: string): BrandCollection[] {
       return { collection: { slug: c.slug, title: c.title }, productCount: matches.length, image: matches[0]?.images[0] };
     })
     .filter((c) => c.productCount > 0);
+}
+
+/* Reviews: looked up by slug, as the API does. */
+
+export function listProductReviews(slug: string, query: ReviewQuery): ReviewPage | null {
+  const product = getProduct(slug);
+  return product ? listReviews(product.id, query) : null;
+}
+
+export function hasReviewedProduct(slug: string, customerId: string): boolean {
+  const product = getProduct(slug);
+  return product ? hasReviewed(product.id, customerId) : false;
+}
+
+export function createProductReview(slug: string, customer: { id: string; name: string }, input: ReviewInput): ProductReview {
+  const product = getProduct(slug);
+  if (!product) throw new Error("Product not found");
+  const review = addReview(product.id, customer, input);
+  // Keep the star line on the product and its cards in step with the new review.
+  product.rating = mockRating(product.id);
+  return review;
 }

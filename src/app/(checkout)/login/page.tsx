@@ -1,23 +1,22 @@
 import { Suspense } from "react";
 import { seoPages } from "@/config/seo-pages";
-import { OtpLoginForm } from "@/features/auth";
+import { SignInPanel } from "@/features/auth";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({ ...seoPages.login, noIndex: true });
 
-async function LoginForm({ searchParams }: { searchParams: PageProps<"/login">["searchParams"] }) {
+async function Panel({ searchParams }: { searchParams: PageProps<"/login">["searchParams"] }) {
   const { next } = await searchParams;
-  return <OtpLoginForm next={typeof next === "string" ? next : undefined} />;
+  return <SignInPanel next={typeof next === "string" ? next : undefined} />;
 }
 
+/** Full page for direct visits and refreshes; in-site links open the same card as a modal. */
 export default function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
-    <div className="container-site flex justify-center py-16">
-      <div className="w-full max-w-sm rounded-card border border-line bg-surface p-8">
-        <h1 className="font-display text-3xl">Sign in</h1>
-        <p className="mb-6 mt-2 text-sm text-muted">Use your mobile number. No password needed.</p>
-        <Suspense fallback={<OtpLoginForm />}>
-          <LoginForm searchParams={searchParams} />
+    <div className="container-site flex justify-center py-10 md:py-16">
+      <div className="w-full max-w-[52rem] rounded-[1.25rem] shadow-[0_12px_40px_rgb(0_0_0/0.08)]">
+        <Suspense fallback={<SignInPanel />}>
+          <Panel searchParams={searchParams} />
         </Suspense>
       </div>
     </div>

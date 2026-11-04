@@ -8,7 +8,6 @@ import { Price } from "./price";
 
 type ProductCardProps = {
   product: ProductSummary;
-  /** Set on the first row of a grid so the LCP image isn't lazy-loaded. */
   priority?: boolean;
 };
 

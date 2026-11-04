@@ -1,7 +1,12 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { routes } from "@/config/routes";
-import { CollectionHeader, ProductListing, ProductListingSkeleton, hasActiveFilters } from "@/features/catalog";
+import {
+  CollectionHeader,
+  ProductListing,
+  ProductListingSkeleton,
+  hasActiveFilters,
+} from "@/features/catalog";
 import { buildMetadata } from "@/lib/seo";
 import { getCollectionBySlug, listCollections } from "@/services";
 
@@ -10,11 +15,14 @@ export async function generateStaticParams() {
   return collections.map((c) => ({ slug: c.slug }));
 }
 
-export async function generateMetadata({ params, searchParams }: PageProps<"/collections/[slug]">) {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: PageProps<"/collections/[slug]">) {
   const { slug } = await params;
   const collection = await getCollectionBySlug(slug);
   if (!collection) return {};
-  // Filtered/sorted variants are not curated: noindex, canonical to the clean URL (SOW §3.11).
+
   const filtered = hasActiveFilters(await searchParams);
   return buildMetadata({
     title: collection.title,
@@ -24,7 +32,10 @@ export async function generateMetadata({ params, searchParams }: PageProps<"/col
   });
 }
 
-export default async function CollectionPage({ params, searchParams }: PageProps<"/collections/[slug]">) {
+export default async function CollectionPage({
+  params,
+  searchParams,
+}: PageProps<"/collections/[slug]">) {
   const { slug } = await params;
   const collection = await getCollectionBySlug(slug);
   if (!collection) notFound();
@@ -39,9 +50,12 @@ export default async function CollectionPage({ params, searchParams }: PageProps
           { name: collection.title, href: routes.collection(slug) },
         ]}
       />
-      {/* Header above is static; filtered results stream in per request. */}
       <Suspense fallback={<ProductListingSkeleton />}>
-        <ProductListing basePath={routes.collection(slug)} searchParams={searchParams} scope={{ collection: slug }} />
+        <ProductListing
+          basePath={routes.collection(slug)}
+          searchParams={searchParams}
+          scope={{ collection: slug }}
+        />
       </Suspense>
     </>
   );

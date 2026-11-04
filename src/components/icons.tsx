@@ -46,6 +46,13 @@ export const CloseIcon = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+export const MailIcon = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}>
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <path d="m4 7 8 6 8-6" />
+  </svg>
+);
+
 export const CheckIcon = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}>
     <path d="m5 12 5 5 9-10" />

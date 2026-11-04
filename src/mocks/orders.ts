@@ -24,7 +24,7 @@ const line = (p: typeof p1, size: string, quantity = 1) => ({
 
 const address = {
   fullName: mockCustomer.name,
-  phone: mockCustomer.phone,
+  phone: "+92 300 1234567",
   line1: "House 12, Street 4, DHA Phase 5",
   city: "Lahore",
   province: "Punjab",

@@ -5,16 +5,12 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
 import { ButtonLink } from "@/components/ui";
 import { routes } from "@/config/routes";
 
-/**
- * "Trending stores" row: heading with ← → arrows, "More stores" on the
- * right, and a horizontally scrolling, snap-aligned list. Cards are
- * rendered on the server and passed in as children.
- */
 export function TrendingStores({ children }: { children: ReactNode }) {
   const listRef = useRef<HTMLUListElement>(null);
   const scroll = (dir: 1 | -1) => {
     const el = listRef.current;
-    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+    if (el)
+      el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
   };
 
   return (
@@ -41,7 +37,11 @@ export function TrendingStores({ children }: { children: ReactNode }) {
             <ArrowRightIcon width={16} height={16} />
           </button>
         </div>
-        <ButtonLink href={routes.brands()} size="sm" className="ml-auto bg-sand text-sand-ink hover:bg-sand/80">
+        <ButtonLink
+          href={routes.brands()}
+          size="sm"
+          className="ml-auto bg-sand text-sand-ink hover:bg-sand/80"
+        >
           More stores
         </ButtonLink>
       </div>

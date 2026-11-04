@@ -1,6 +1,6 @@
 import { routes } from "@/config/routes";
 import { siteConfig } from "@/config/site";
-import type { Brand, Product } from "@/types";
+import type { Brand, Product, ReviewPage } from "@/types";
 import { toMajor } from "./money";
 import { absoluteUrl } from "./seo";
 
@@ -37,8 +37,10 @@ export function websiteJsonLd() {
   };
 }
 
-export function productJsonLd(product: Product) {
+/** Reviews are optional: Google only shows stars when aggregateRating has at least one review. */
+export function productJsonLd(product: Product, reviews?: ReviewPage) {
   const inStock = product.variants.some((v) => v.stock > 0);
+  const rated = reviews && reviews.summary.count > 0;
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -48,6 +50,19 @@ export function productJsonLd(product: Product) {
     image: product.images.map((img) => absoluteUrl(img.url)),
     brand: { "@type": "Brand", name: product.brand.name },
     material: product.material,
+    aggregateRating: rated
+      ? { "@type": "AggregateRating", ratingValue: reviews.summary.average, reviewCount: reviews.summary.count, bestRating: 5, worstRating: 1 }
+      : undefined,
+    review: rated
+      ? reviews.items.map((r) => ({
+          "@type": "Review",
+          author: { "@type": "Person", name: r.authorName },
+          datePublished: r.createdAt.slice(0, 10),
+          name: r.title,
+          reviewBody: r.body,
+          reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 },
+        }))
+      : undefined,
     offers: {
       "@type": "Offer",
       url: absoluteUrl(routes.product(product.slug)),

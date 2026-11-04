@@ -13,13 +13,18 @@ type AddToCartProps = {
   product: Pick<Product, "id" | "slug" | "name" | "brand" | "price" | "variants" | "images">;
 };
 
-/** Size selection + add to basket. Only this block of the product page hydrates. */
+/** Most of one size per order; a size with less stock caps the stepper lower. */
+const MAX_PER_ORDER = 10;
+
+/** Size, quantity and add to basket. Only this block of the product page hydrates. */
 export function AddToCart({ product }: AddToCartProps) {
   const addItem = useCartStore((s) => s.addItem);
   const [variantId, setVariantId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const variant = product.variants.find((v) => v.id === variantId);
+  const maxQuantity = Math.max(1, Math.min(variant?.stock ?? MAX_PER_ORDER, MAX_PER_ORDER));
 
   function handleAdd() {
     if (!variant) {
@@ -36,7 +41,7 @@ export function AddToCart({ product }: AddToCartProps) {
       image: product.images[0],
       unitPrice: product.price,
       maxQuantity: variant.stock,
-    });
+    }, quantity);
     setAdded(true);
     setTimeout(() => setAdded(false), 2500);
   }
@@ -62,6 +67,7 @@ export function AddToCart({ product }: AddToCartProps) {
                   onChange={() => {
                     setVariantId(v.id);
                     setError(null);
+                    setQuantity((q) => Math.min(q, Math.max(1, v.stock)));
                   }}
                   className="peer sr-only"
                 />
@@ -85,6 +91,35 @@ export function AddToCart({ product }: AddToCartProps) {
           </p>
         )}
       </fieldset>
+
+      <div>
+        <p id="quantity-label" className="mb-3 text-sm font-medium">
+          Quantity
+        </p>
+        <div className="inline-flex items-center rounded-md border border-line" role="group" aria-labelledby="quantity-label">
+          <button
+            type="button"
+            className="size-11 text-lg hover:bg-subtle disabled:opacity-40"
+            aria-label="Decrease quantity"
+            disabled={quantity <= 1}
+            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+          >
+            −
+          </button>
+          <span className="w-10 text-center text-sm tabular-nums" aria-live="polite">
+            {quantity}
+          </span>
+          <button
+            type="button"
+            className="size-11 text-lg hover:bg-subtle disabled:opacity-40"
+            aria-label="Increase quantity"
+            disabled={quantity >= maxQuantity}
+            onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
+          >
+            +
+          </button>
+        </div>
+      </div>
 
       <Button size="lg" fullWidth onClick={handleAdd}>
         Add to basket

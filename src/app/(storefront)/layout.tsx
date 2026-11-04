@@ -1,6 +1,7 @@
 import { SiteFooter, SiteHeader } from "@/components/layout";
 
-export default function StorefrontLayout({ children }: LayoutProps<"/">) {
+/** `modal` is the @modal slot: the sign-in card when a /login link is intercepted, otherwise nothing. */
+export default function StorefrontLayout({ children, modal }: LayoutProps<"/">) {
   return (
     <>
       <SiteHeader />
@@ -8,6 +9,7 @@ export default function StorefrontLayout({ children }: LayoutProps<"/">) {
         {children}
       </main>
       <SiteFooter />
+      {modal}
     </>
   );
 }

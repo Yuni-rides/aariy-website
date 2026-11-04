@@ -16,7 +16,7 @@ async function AccountOverview() {
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-display text-4xl">Hello, {customer.name.split(" ")[0]}</h1>
-          <p className="mt-1 text-sm text-muted">{customer.phone}</p>
+          <p className="mt-1 text-sm text-muted">{customer.email}</p>
         </div>
         <form action={signOutAction}>
           <Button type="submit" variant="link">

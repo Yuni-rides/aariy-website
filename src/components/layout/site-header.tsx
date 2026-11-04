@@ -1,11 +1,20 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { SearchIcon, UserIcon } from "@/components/icons";
 import { routes } from "@/config/routes";
 import { siteConfig } from "@/config/site";
 import { WishlistLink } from "@/features/wishlist/components/wishlist-link";
+import { getSessionToken } from "@/lib/session";
+import { AccountLink } from "./account-link";
 import { IconNav } from "./icon-nav";
 
 const pillButton = "relative inline-flex size-9 items-center justify-center rounded-full text-muted hover:bg-subtle hover:text-ink";
+
+/** Reads the session cookie, so it streams in; the rest of the header stays static. */
+async function SessionAccountLink() {
+  const signedIn = Boolean(await getSessionToken());
+  return <AccountLink signedIn={signedIn} className={pillButton} />;
+}
 
 /**
  * Figma header: logo left, icon pill centre, wishlist + account pill right.
@@ -29,9 +38,16 @@ export function SiteHeader() {
               <SearchIcon width={18} height={18} />
             </Link>
             <WishlistLink className={pillButton} />
-            <Link href={routes.account()} className={pillButton} aria-label="My account">
-              <UserIcon width={18} height={18} />
-            </Link>
+            {/* Until the session is known, point at /account: it sends signed-out visitors to sign-in anyway. */}
+            <Suspense
+              fallback={
+                <Link href={routes.account()} className={pillButton} aria-label="My account">
+                  <UserIcon width={18} height={18} />
+                </Link>
+              }
+            >
+              <SessionAccountLink />
+            </Suspense>
           </div>
         </div>
       </div>

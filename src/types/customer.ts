@@ -1,6 +1,7 @@
 export type Customer = {
   id: string;
   name: string;
-  phone: string;
-  email?: string;
+  /** Buyers sign in by a one-time code sent to this address. */
+  email: string;
+  phone?: string;
 };

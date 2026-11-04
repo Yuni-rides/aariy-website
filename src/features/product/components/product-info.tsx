@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ShieldIcon } from "@/components/icons";
 import { Price } from "@/components/product";
 import { routes } from "@/config/routes";
+import { RatingStars } from "@/features/reviews";
 import type { Product } from "@/types";
 import { AddToCart } from "./add-to-cart";
 import { DeliveryPromise } from "./delivery-promise";
@@ -20,6 +21,15 @@ export function ProductInfo({ product }: { product: Product }) {
           {product.brand.verified && <ShieldIcon width={14} height={14} className="text-success" aria-label="Verified" />}
         </Link>
         <h1 className="font-display text-3xl leading-tight md:text-4xl">{product.name}</h1>
+        {product.rating && product.rating.count > 0 && (
+          <a href="#reviews" className="flex w-fit items-center gap-2 text-sm hover:text-accent">
+            <RatingStars value={product.rating.average} size={15} />
+            <span className="font-medium">{product.rating.average.toFixed(1)}</span>
+            <span className="text-muted underline underline-offset-4">
+              {product.rating.count} {product.rating.count === 1 ? "review" : "reviews"}
+            </span>
+          </a>
+        )}
         <Price price={product.price} compareAt={product.compareAtPrice} size="lg" />
         <p className="text-xs text-muted">Inclusive of all taxes</p>
       </div>

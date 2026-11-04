@@ -6,16 +6,23 @@ import { siteConfig } from "@/config/site";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
-// Fonts are self-hosted by next/font: no layout shift, no third-party request at runtime.
-// Outfit matches the Figma design (logo, nav, headings, body).
-const body = Outfit({ variable: "--font-body", subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], display: "swap" });
+const body = Outfit({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  openGraph: { siteName: siteConfig.name, locale: siteConfig.locale, type: "website" },
+  openGraph: {
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    type: "website",
+  },
   formatDetection: { telephone: false },
 };
 
