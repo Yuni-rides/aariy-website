@@ -8,7 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // Non-curated filter combinations are noindex via metadata; these paths are never crawled.
         disallow: [...noIndexPaths, "/*?*sort=", "/*?*size=", "/*?*price="],
       },
     ],

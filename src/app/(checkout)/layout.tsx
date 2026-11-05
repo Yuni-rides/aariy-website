@@ -1,6 +1,5 @@
 import { CheckoutHeader } from "@/components/layout";
 
-/** Checkout and sign-in: minimal chrome, no nav or footer links to leak conversions. */
 export default function CheckoutLayout({ children }: LayoutProps<"/">) {
   return (
     <>

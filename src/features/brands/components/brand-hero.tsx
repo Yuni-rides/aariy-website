@@ -8,16 +8,20 @@ import type { Brand } from "@/types";
 
 export type BrandTab = "products" | "collections";
 
-/**
- * Figma store header: campaign photo under a dark shade, round white logo
- * (the name as a wordmark until real logos arrive), rating and item count,
- * then "All products" / "Collections" pills. Each tab is its own URL, so
- * both stay static and indexable.
- */
-export function BrandHero({ brand, active }: { brand: Brand; active: BrandTab }) {
+export function BrandHero({
+  brand,
+  active,
+}: {
+  brand: Brand;
+  active: BrandTab;
+}) {
   const tabs = [
     { key: "products", label: "All products", href: routes.brand(brand.slug) },
-    { key: "collections", label: "Collections", href: routes.brandCollections(brand.slug) },
+    {
+      key: "collections",
+      label: "Collections",
+      href: routes.brandCollections(brand.slug),
+    },
   ] as const;
 
   return (
@@ -40,21 +44,35 @@ export function BrandHero({ brand, active }: { brand: Brand; active: BrandTab })
             className="-z-10 object-cover"
           />
         )}
-        {/* Same #272F39 shade as the home hero and store cards */}
-        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-[#272F39]/10 via-[#272F39]/50 to-[#272F39]/95" />
+
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-[#272F39]/10 via-[#272F39]/50 to-[#272F39]/95"
+        />
 
         <div className="flex items-center gap-4 md:gap-5">
           <span className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white text-ink md:size-24">
             {brand.logo ? (
-              <Image src={brand.logo.url} alt={brand.logo.alt} width={96} height={96} className="size-full object-cover" />
+              <Image
+                src={brand.logo.url}
+                alt={brand.logo.alt}
+                width={96}
+                height={96}
+                className="size-full object-cover"
+              />
             ) : (
-              <span aria-hidden className="px-2 text-center font-display text-[13px] leading-tight md:text-[15px]">
+              <span
+                aria-hidden
+                className="px-2 text-center font-display text-[13px] leading-tight md:text-[15px]"
+              >
                 {brand.name.replace(/\s+/g, ".")}
               </span>
             )}
           </span>
           <div className="min-w-0">
-            <h1 className="truncate text-2xl font-semibold leading-tight md:text-4xl">{brand.name}</h1>
+            <h1 className="truncate text-2xl font-semibold leading-tight md:text-4xl">
+              {brand.name}
+            </h1>
             <p className="mt-1.5 flex items-center gap-1.5 text-sm md:text-base">
               {brand.rating && (
                 <>
@@ -67,13 +85,17 @@ export function BrandHero({ brand, active }: { brand: Brand; active: BrandTab })
                 </>
               )}
               <span>
-                {brand.productCount} {brand.productCount === 1 ? "item" : "items"}
+                {brand.productCount}{" "}
+                {brand.productCount === 1 ? "item" : "items"}
               </span>
             </p>
           </div>
         </div>
 
-        <nav aria-label={`${brand.name} store`} className="mt-6 flex gap-3 md:mt-8">
+        <nav
+          aria-label={`${brand.name} store`}
+          className="mt-6 flex gap-3 md:mt-8"
+        >
           {tabs.map((tab) => {
             const isActive = tab.key === active;
             return (

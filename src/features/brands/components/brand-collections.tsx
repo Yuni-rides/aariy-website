@@ -4,12 +4,20 @@ import { EmptyState } from "@/components/ui";
 import { routes } from "@/config/routes";
 import type { BrandCollection } from "@/types";
 
-/** Collections tab: one photo card per collection, opening the brand's listing narrowed to it. */
-export function BrandCollections({ brandSlug, collections }: { brandSlug: string; collections: BrandCollection[] }) {
+export function BrandCollections({
+  brandSlug,
+  collections,
+}: {
+  brandSlug: string;
+  collections: BrandCollection[];
+}) {
   if (collections.length === 0) {
     return (
       <div className="container-site">
-        <EmptyState title="No collections yet" description="This store hasn't grouped its products into collections." />
+        <EmptyState
+          title="No collections yet"
+          description="This store hasn't grouped its products into collections."
+        />
       </div>
     );
   }
@@ -33,7 +41,9 @@ export function BrandCollections({ brandSlug, collections }: { brandSlug: string
                 />
               )}
             </span>
-            <span className="mt-3 block font-semibold group-hover:text-accent">{collection.title}</span>
+            <span className="mt-3 block font-semibold group-hover:text-accent">
+              {collection.title}
+            </span>
             <span className="text-sm text-muted">
               {productCount} {productCount === 1 ? "item" : "items"}
             </span>

@@ -10,11 +10,17 @@ import { otpAction, type OtpState } from "../actions";
 
 const submit =
   "flex h-12 w-full items-center justify-center rounded-xl bg-accent text-[15px] font-medium text-accent-ink transition-colors hover:bg-accent-hover disabled:pointer-events-none disabled:opacity-60";
-const slide = { initial: { opacity: 0, x: -16 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 0, x: 16 } };
+const slide = {
+  initial: { opacity: 0, x: -16 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 16 },
+};
 
-/** Email one-time code: one form signs in returning buyers and registers new ones. */
 export function OtpLoginForm({ next }: { next?: string }) {
-  const [state, formAction, pending] = useActionState<OtpState, FormData>(otpAction, { step: "email" });
+  const [state, formAction, pending] = useActionState<OtpState, FormData>(
+    otpAction,
+    { step: "email" },
+  );
 
   return (
     <form action={formAction} className="flex flex-col" noValidate>
@@ -49,34 +55,57 @@ export function OtpLoginForm({ next }: { next?: string }) {
               />
             </div>
             {state.error && (
-              <p id="email-error" role="alert" className="mt-1.5 text-xs text-danger">
+              <p
+                id="email-error"
+                role="alert"
+                className="mt-1.5 text-xs text-danger"
+              >
                 {state.error}
               </p>
             )}
 
             <p className="mt-3 text-[11px] leading-relaxed text-muted">
-              By tapping &ldquo;Request OTP&rdquo; you agree to receive a one-time passcode from Aariy by email at the address
-              provided, and order-status updates if you place an order. See our{" "}
-              <Link href={routes.policy("privacy")} className="text-[#2563eb] hover:underline">
+              By tapping &ldquo;Request OTP&rdquo; you agree to receive a
+              one-time passcode from Aariy by email at the address provided, and
+              order-status updates if you place an order. See our{" "}
+              <Link
+                href={routes.policy("privacy")}
+                className="text-[#2563eb] hover:underline"
+              >
                 Privacy Policy
               </Link>
               .
             </p>
 
             <label className="mt-5 flex w-fit cursor-pointer items-center gap-3 text-xs">
-              <input type="checkbox" name="newsletter" className="peer sr-only" />
+              <input
+                type="checkbox"
+                name="newsletter"
+                className="peer sr-only"
+              />
               <span
                 aria-hidden
                 className="flex size-5 items-center justify-center rounded-md bg-subtle text-transparent transition-colors peer-checked:bg-accent peer-checked:text-accent-ink peer-focus-visible:outline-2 peer-focus-visible:outline-accent"
               >
-                <svg viewBox="0 0 24 24" width={13} height={13} fill="none" stroke="currentColor" strokeWidth={3}>
+                <svg
+                  viewBox="0 0 24 24"
+                  width={13}
+                  height={13}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={3}
+                >
                   <path d="m5 12 5 5 9-10" />
                 </svg>
               </span>
               Subscribe to our newsletter
             </label>
 
-            <button type="submit" disabled={pending} className={cn(submit, "mt-5")}>
+            <button
+              type="submit"
+              disabled={pending}
+              className={cn(submit, "mt-5")}
+            >
               {pending ? "Sending code…" : "Request OTP"}
             </button>
           </m.div>
@@ -106,7 +135,11 @@ export function OtpLoginForm({ next }: { next?: string }) {
               )}
             />
             {state.error && (
-              <p id="code-error" role="alert" className="mt-1.5 text-xs text-danger">
+              <p
+                id="code-error"
+                role="alert"
+                className="mt-1.5 text-xs text-danger"
+              >
                 {state.error}
               </p>
             )}
@@ -115,14 +148,30 @@ export function OtpLoginForm({ next }: { next?: string }) {
                 A new code is on its way.
               </p>
             )}
-            <button type="submit" disabled={pending} className={cn(submit, "mt-5")}>
+            <button
+              type="submit"
+              disabled={pending}
+              className={cn(submit, "mt-5")}
+            >
               {pending ? "Verifying…" : "Verify and sign in"}
             </button>
             <div className="mt-4 flex justify-between text-xs">
-              <button type="submit" name="intent" value="change-email" formNoValidate className="underline underline-offset-4 hover:text-accent">
+              <button
+                type="submit"
+                name="intent"
+                value="change-email"
+                formNoValidate
+                className="underline underline-offset-4 hover:text-accent"
+              >
                 Change email
               </button>
-              <button type="submit" name="intent" value="resend" formNoValidate className="underline underline-offset-4 hover:text-accent">
+              <button
+                type="submit"
+                name="intent"
+                value="resend"
+                formNoValidate
+                className="underline underline-offset-4 hover:text-accent"
+              >
                 Resend code
               </button>
             </div>

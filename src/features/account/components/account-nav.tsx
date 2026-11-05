@@ -31,7 +31,6 @@ function ActiveNavLinks() {
   return <NavLinks pathname={usePathname()} />;
 }
 
-/** Links render in the static shell; the active state streams in (usePathname is request-time). */
 export function AccountNav() {
   return (
     <nav aria-label="Account">

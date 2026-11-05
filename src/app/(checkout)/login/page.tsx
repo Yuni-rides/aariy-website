@@ -5,12 +5,15 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({ ...seoPages.login, noIndex: true });
 
-async function Panel({ searchParams }: { searchParams: PageProps<"/login">["searchParams"] }) {
+async function Panel({
+  searchParams,
+}: {
+  searchParams: PageProps<"/login">["searchParams"];
+}) {
   const { next } = await searchParams;
   return <SignInPanel next={typeof next === "string" ? next : undefined} />;
 }
 
-/** Full page for direct visits and refreshes; in-site links open the same card as a modal. */
 export default function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <div className="container-site flex justify-center py-10 md:py-16">

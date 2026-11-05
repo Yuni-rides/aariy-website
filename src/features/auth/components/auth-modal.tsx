@@ -6,19 +6,26 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { CloseIcon } from "@/components/icons";
 import { routes } from "@/config/routes";
 
-/**
- * Sign-in opened over the current page (intercepted /login route).
- * Closing goes back in history, so the page underneath is exactly as left.
- * After sign-in the action redirects to another page; the slot keeps this
- * route mounted on soft navigation, so the modal hides itself once the URL
- * is no longer /login (a catch-all slot would swallow the real /login page).
- */
-export function AuthModal({ children, labelledBy }: { children: ReactNode; labelledBy: string }) {
+export function AuthModal({
+  children,
+  labelledBy,
+}: {
+  children: ReactNode;
+  labelledBy: string;
+}) {
   const open = usePathname() === routes.login();
-  return open ? <ModalShell labelledBy={labelledBy}>{children}</ModalShell> : null;
+  return open ? (
+    <ModalShell labelledBy={labelledBy}>{children}</ModalShell>
+  ) : null;
 }
 
-function ModalShell({ children, labelledBy }: { children: ReactNode; labelledBy: string }) {
+function ModalShell({
+  children,
+  labelledBy,
+}: {
+  children: ReactNode;
+  labelledBy: string;
+}) {
   const router = useRouter();
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -30,9 +37,10 @@ function ModalShell({ children, labelledBy }: { children: ReactNode; labelledBy:
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") router.back();
-      // Keep Tab inside the dialog.
       if (e.key === "Tab" && dialogRef.current) {
-        const items = dialogRef.current.querySelectorAll<HTMLElement>("a[href], button:not([disabled]), input:not([type=hidden])");
+        const items = dialogRef.current.querySelectorAll<HTMLElement>(
+          "a[href], button:not([disabled]), input:not([type=hidden])",
+        );
         const first = items[0];
         const last = items[items.length - 1];
         if (e.shiftKey && document.activeElement === first) {

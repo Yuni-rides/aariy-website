@@ -4,20 +4,30 @@ import { ProductGridSkeleton } from "@/components/product";
 import { JsonLd } from "@/components/seo";
 import { Breadcrumbs } from "@/components/ui";
 import { routes } from "@/config/routes";
-import { ProductGallery, ProductInfo, RelatedProducts } from "@/features/product";
+import {
+  ProductGallery,
+  ProductInfo,
+  RelatedProducts,
+} from "@/features/product";
 import { ProductReviews } from "@/features/reviews";
 import { categoryCrumbs, findCategoryById } from "@/lib/categories";
 import { buildMetadata } from "@/lib/seo";
 import { productJsonLd } from "@/lib/structured-data";
-import { getCategoryTree, getProductBySlug, getProductReviews, getProductSlugsForBuild } from "@/services";
+import {
+  getCategoryTree,
+  getProductBySlug,
+  getProductReviews,
+  getProductSlugsForBuild,
+} from "@/services";
 
-/** Prerender known products at build. New products render on first visit, then serve from cache. */
 export async function generateStaticParams() {
   const slugs = await getProductSlugsForBuild();
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/products/[slug]">) {
+export async function generateMetadata({
+  params,
+}: PageProps<"/products/[slug]">) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return {};
@@ -29,9 +39,15 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
   });
 }
 
-export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
+export default async function ProductPage({
+  params,
+}: PageProps<"/products/[slug]">) {
   const { slug } = await params;
-  const [product, tree, reviews] = await Promise.all([getProductBySlug(slug), getCategoryTree(), getProductReviews(slug)]);
+  const [product, tree, reviews] = await Promise.all([
+    getProductBySlug(slug),
+    getCategoryTree(),
+    getProductReviews(slug),
+  ]);
   if (!product) notFound();
   const entry = findCategoryById(tree, product.categoryId);
   const trail = entry ? categoryCrumbs(entry.path) : [];
@@ -51,7 +67,10 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         <ProductGallery images={product.images} />
         <ProductInfo product={product} />
       </div>
-      <ProductReviews slug={product.slug} sizes={product.variants.map((v) => v.size)} />
+      <ProductReviews
+        slug={product.slug}
+        sizes={product.variants.map((v) => v.size)}
+      />
       <Suspense
         fallback={
           <div className="container-site mt-24">

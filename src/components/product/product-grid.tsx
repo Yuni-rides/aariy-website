@@ -6,13 +6,17 @@ import { ProductCard } from "./product-card";
 type ProductGridProps = {
   products: ProductSummary[];
   className?: string;
-  /** Number of leading cards to load eagerly (above the fold). */
   priorityCount?: number;
 };
 
-const gridClass = "grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 xl:grid-cols-4";
+const gridClass =
+  "grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 xl:grid-cols-4";
 
-export function ProductGrid({ products, className, priorityCount = 0 }: ProductGridProps) {
+export function ProductGrid({
+  products,
+  className,
+  priorityCount = 0,
+}: ProductGridProps) {
   return (
     <ul className={cn(gridClass, className)}>
       {products.map((product, i) => (

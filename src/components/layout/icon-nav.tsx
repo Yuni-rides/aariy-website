@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, type ComponentType, type SVGProps } from "react";
-import { CartIcon, GridIcon, HelpIcon, HomeIcon, OrdersIcon, StoreIcon, TagIcon } from "@/components/icons";
+import {
+  CartIcon,
+  GridIcon,
+  HelpIcon,
+  HomeIcon,
+  OrdersIcon,
+  StoreIcon,
+  TagIcon,
+} from "@/components/icons";
 import { iconNav, type IconNavKey } from "@/config/navigation";
 import { cartCount, useCartStore } from "@/features/cart/store/cart-store";
 import { useHydrated } from "@/hooks/use-hydrated";
@@ -54,10 +62,11 @@ function Items({ pathname }: { pathname: string | null }) {
             >
               <Icon width={20} height={20} />
               {item.key === "cart" && <CartBadge />}
-              {/* Label under the icon on the mobile tab bar */}
-              <span className="text-[10px] leading-none md:hidden">{item.label}</span>
+              <span className="text-[10px] leading-none md:hidden">
+                {item.label}
+              </span>
             </Link>
-            {/* Desktop tooltip, as in the Figma ("Home" under the icon) */}
+
             <span
               role="tooltip"
               className="pointer-events-none absolute left-1/2 top-full mt-2 hidden -translate-x-1/2 rounded-md bg-surface px-2 py-1 text-[11px] whitespace-nowrap opacity-0 shadow-pill transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 md:block"
@@ -75,11 +84,6 @@ function ActiveItems() {
   return <Items pathname={usePathname()} />;
 }
 
-/**
- * Centre pill on desktop, fixed bottom tab bar on mobile.
- * Active state needs usePathname (request-time), so it streams in;
- * the links themselves are in the static shell.
- */
 export function IconNav() {
   return (
     <nav

@@ -6,7 +6,6 @@ import { ProductListing, ProductListingSkeleton } from "@/features/catalog";
 import { SearchHeader } from "@/features/search";
 import { buildMetadata } from "@/lib/seo";
 
-// Search result pages are never indexed (SOW §3.11).
 export const metadata = buildMetadata({ ...seoPages.search, noIndex: true });
 
 export default function SearchPage({ searchParams }: PageProps<"/search">) {
@@ -22,7 +21,11 @@ export default function SearchPage({ searchParams }: PageProps<"/search">) {
         <SearchHeader searchParams={searchParams} />
       </Suspense>
       <Suspense fallback={<ProductListingSkeleton />}>
-        <ProductListing basePath={routes.search()} searchParams={searchParams} scope={{}} />
+        <ProductListing
+          basePath={routes.search()}
+          searchParams={searchParams}
+          scope={{}}
+        />
       </Suspense>
     </>
   );
