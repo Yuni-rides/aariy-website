@@ -21,7 +21,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           fill
           sizes="(min-width: 1280px) 22vw, (min-width: 768px) 30vw, 48vw"
           priority={priority}
-          className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]"
+          className="object-cover object-top transition-transform duration-700 ease-out-soft group-hover:scale-[1.03]"
         />
         {product.hoverImage && (
           <Image
@@ -29,7 +29,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             alt=""
             fill
             sizes="(min-width: 1280px) 22vw, (min-width: 768px) 30vw, 48vw"
-            className="object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            className="object-cover object-top opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           />
         )}
         <WishlistButton product={product} className="absolute right-2 top-2" />

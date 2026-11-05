@@ -33,7 +33,7 @@ const SORTS: { value: SortKey; label: string }[] = [
   { value: "budget", label: "Budget" },
 ];
 
-const SIZE_ORDER = ["XS", "S", "M", "L", "XL"];
+const SIZE_ORDER = ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "XS", "S", "M", "L", "XL"];
 const EASE = [0.22, 1, 0.36, 1] as const;
 const EMPTY: Record<FilterKey, string[]> = {
   category: [],

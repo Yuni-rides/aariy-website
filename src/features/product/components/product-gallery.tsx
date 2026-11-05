@@ -25,7 +25,7 @@ export function ProductGallery({ images }: { images: ImageAsset[] }) {
                 i === active ? "border-ink" : "border-transparent opacity-70 hover:opacity-100",
               )}
             >
-              <Image src={img.url} alt="" fill sizes="80px" className="object-cover" />
+              <Image src={img.url} alt="" fill sizes="80px" className="object-cover object-top" />
             </button>
           </li>
         ))}
@@ -46,7 +46,7 @@ export function ProductGallery({ images }: { images: ImageAsset[] }) {
               fill
               priority={active === 0}
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
+              className="object-cover object-top"
             />
           </m.div>
         </AnimatePresence>

@@ -61,7 +61,7 @@ export function CategoryCircles({ categories }: { categories: CategoryEntry[] })
                 alt=""
                 fill
                 sizes="(min-width: 1280px) 15rem, (min-width: 768px) 20vw, 8rem"
-                className="-z-10 object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
+                className="-z-10 object-cover object-top transition-transform duration-700 ease-out-soft group-hover:scale-105"
               />
               <span
                 aria-hidden

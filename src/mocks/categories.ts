@@ -28,7 +28,23 @@ export const mockCategories: Category[] = build([
     name: "Men",
     icon: "/images/categories/men.png",
     tint: "#c9dcfa",
-    children: [{ name: "Clothing" }, { name: "Accessories" }, { name: "Footwear" }],
+    children: [
+      {
+        name: "Clothing",
+        children: [
+          {
+            name: "Eastern Wear",
+            children: [
+              { name: "Kurta Shalwar", image: "/images/mens/kurta1.jpg" },
+              { name: "Waistcoats", image: "/images/mens/coat1.jpg" },
+              { name: "Prince Coats", image: "/images/mens/princecoat2.jpg" },
+            ],
+          },
+        ],
+      },
+      { name: "Accessories" },
+      { name: "Footwear" },
+    ],
   },
   {
     name: "Women",
@@ -86,7 +102,24 @@ export const mockCategories: Category[] = build([
     name: "Kids",
     icon: "/images/categories/kids.png",
     tint: "#d6e4fb",
-    children: [{ name: "Girls" }, { name: "Boys" }, { name: "Footwear" }],
+    children: [
+      {
+        name: "Girls",
+        children: [
+          { name: "Gharara & Sharara", slug: "gharara-sharara", image: "/images/kids/kids1.jpg" },
+          { name: "2 Piece", image: "/images/kids/kids3.jpg" },
+          { name: "3 Piece", image: "/images/kids/kids4.jpg" },
+        ],
+      },
+      {
+        name: "Boys",
+        children: [
+          { name: "Kameez Shalwar", image: "/images/kids/kids5.jpg" },
+          { name: "Kurta", image: "/images/kids/kids6.jpg" },
+        ],
+      },
+      { name: "Footwear" },
+    ],
   },
   { name: "Beauty", icon: "/images/categories/beauty.png", tint: "#fdd9dd" },
   { name: "Jewelry", icon: "/images/categories/jewelry.png", tint: "#fdf2c4" },

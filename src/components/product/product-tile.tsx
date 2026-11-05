@@ -30,7 +30,7 @@ export function ProductTile({ product, sizes, priority, size = "md", showWishlis
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
+        className="object-cover object-top transition-transform duration-700 ease-out-soft group-hover:scale-105"
       />
       <Link href={routes.product(product.slug)} className="absolute inset-0">
         <span className="sr-only">

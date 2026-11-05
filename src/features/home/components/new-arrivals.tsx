@@ -15,13 +15,17 @@ const TABS: { value: Audience; label: string; icon: string }[] = [
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/**
- * Figma "New Arrivals": Men / Women / Kids pills (active one peach with a
- * soft shadow, the rest light blue) over a horizontally scrolling row.
- */
-export function NewArrivals({ products, limit = 10 }: { products: ProductSummary[]; limit?: number }) {
+export function NewArrivals({
+  products,
+  limit = 10,
+}: {
+  products: ProductSummary[];
+  limit?: number;
+}) {
   const [audience, setAudience] = useState<Audience>("women");
-  const visible = products.filter((p) => p.audience === audience).slice(0, limit);
+  const visible = products
+    .filter((p) => p.isNew && p.audience === audience)
+    .slice(0, limit);
 
   return (
     <section aria-labelledby="new-arrivals" className="container-site">
@@ -29,7 +33,11 @@ export function NewArrivals({ products, limit = 10 }: { products: ProductSummary
         New Arrivals
       </h2>
 
-      <div role="tablist" aria-label="Shop new arrivals for" className="mt-4 flex gap-3">
+      <div
+        role="tablist"
+        aria-label="Shop new arrivals for"
+        className="mt-4 flex gap-3"
+      >
         {TABS.map((tab) => {
           const active = tab.value === audience;
           return (
@@ -43,10 +51,18 @@ export function NewArrivals({ products, limit = 10 }: { products: ProductSummary
               onClick={() => setAudience(tab.value)}
               className={cn(
                 "inline-flex h-10 items-center gap-2 rounded-full py-1 pl-2 pr-4 text-sm transition-[background-color,box-shadow]",
-                active ? "bg-accent-soft shadow-pill" : "bg-[#d9e6fb] hover:bg-[#c9dbf8]",
+                active
+                  ? "bg-accent-soft shadow-pill"
+                  : "bg-[#d9e6fb] hover:bg-[#c9dbf8]",
               )}
             >
-              <Image src={tab.icon} alt="" width={28} height={28} className="size-7 object-contain" />
+              <Image
+                src={tab.icon}
+                alt=""
+                width={28}
+                height={28}
+                className="size-7 object-contain"
+              />
               {tab.label}
             </button>
           );
@@ -74,7 +90,9 @@ export function NewArrivals({ products, limit = 10 }: { products: ProductSummary
               </li>
             ))}
             {visible.length === 0 && (
-              <li className="py-10 text-sm text-muted">New pieces for {audience} are on their way.</li>
+              <li className="py-10 text-sm text-muted">
+                New pieces for {audience} are on their way.
+              </li>
             )}
           </m.ul>
         </AnimatePresence>

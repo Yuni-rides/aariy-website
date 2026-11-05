@@ -5,16 +5,10 @@ import { routes } from "@/config/routes";
 import { toMajor } from "@/lib/money";
 import type { ProductSummary } from "@/types";
 
-/** Figma prices on this row read "RS 34,000". */
 function formatRs(product: ProductSummary) {
   return `RS ${toMajor(product.price).toLocaleString("en-PK")}`;
 }
 
-/**
- * New-arrivals card from the Figma: square photo, price + star rating +
- * basket button on one line, "Brand Product" underneath. The basket button
- * opens the product page, since a size has to be picked before adding.
- */
 export function NewArrivalCard({ product }: { product: ProductSummary }) {
   const href = routes.product(product.slug);
   return (
@@ -25,7 +19,7 @@ export function NewArrivalCard({ product }: { product: ProductSummary }) {
           alt={product.image.alt}
           fill
           sizes="(min-width: 768px) 13rem, 11rem"
-          className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-700 ease-out-soft group-hover:scale-105"
         />
       </div>
 
