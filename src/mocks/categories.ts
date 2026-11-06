@@ -4,7 +4,6 @@ type Draft = Omit<Category, "id" | "slug" | "children"> & { slug?: string; child
 
 const slugify = (name: string) => name.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-/** Ids follow the path ("cat_women_clothing_eastern-ready-to-wear_pishwas") so products can refer to a leaf by name. */
 function build(drafts: Draft[], parent = "cat"): Category[] {
   return drafts.map(({ children, slug, ...rest }) => {
     const s = slug ?? slugify(rest.name);
@@ -42,8 +41,8 @@ export const mockCategories: Category[] = build([
           },
         ],
       },
-      { name: "Accessories" },
-      { name: "Footwear" },
+      // { name: "Accessories" },
+      // { name: "Footwear" },
     ],
   },
   {
@@ -63,30 +62,31 @@ export const mockCategories: Category[] = build([
               ["Sharara", "sharara"],
               ["Kaftan", "kaftan"],
               ["Lehenga", "lehenga"],
-              ["Gharara", "gharara"],
+              ["Anarkali", "anarkali"],
+              ["Saree", "saree"],
             ]),
           },
-          {
-            name: "Eastern Unstitched",
-            children: leaves([
-              ["2 Piece", "kurta-set"],
-              ["3 Piece", "maxi"],
-              ["Lawn", "kaftan"],
-              ["Shawl Suits", "gharara"],
-            ]),
-          },
-          {
-            name: "Western",
-            children: leaves([
-              ["Tops", "kaftan"],
-              ["Dresses", "maxi"],
-              ["Co-ords", "kurta-set"],
-            ]),
-          },
+          // {
+          //   name: "Eastern Unstitched",
+          //   children: leaves([
+          //     ["2 Piece", "kurta-set"],
+          //     ["3 Piece", "maxi"],
+          //     ["Lawn", "kaftan"],
+          //     ["Shawl Suits", "pishwas"],
+          //   ]),
+          // },
+          // {
+          //   name: "Western",
+          //   children: leaves([
+          //     ["Tops", "kaftan"],
+          //     ["Dresses", "maxi"],
+          //     ["Co-ords", "kurta-set"],
+          //   ]),
+          // },
           {
             name: "Modest Wear",
             children: leaves([
-              ["Abayas", "maxi"],
+              ["Abayas", "abaya"],
               ["Kaftans", "kaftan"],
             ]),
           },

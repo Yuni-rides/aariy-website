@@ -6,16 +6,16 @@ import { useRef } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
 import type { CategoryEntry } from "@/types";
 
-/**
- * Figma "Categories": big round photos in two rows, label over a dark fade
- * at the bottom, ← → arrows top-right. Fed by every picture category in
- * the category tree, so Men and Kids entries appear here once they are added.
- */
-export function CategoryCircles({ categories }: { categories: CategoryEntry[] }) {
+export function CategoryCircles({
+  categories,
+}: {
+  categories: CategoryEntry[];
+}) {
   const listRef = useRef<HTMLUListElement>(null);
   const scroll = (dir: 1 | -1) => {
     const el = listRef.current;
-    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+    if (el)
+      el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
   };
 
   if (categories.length === 0) return null;

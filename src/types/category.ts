@@ -1,9 +1,4 @@
-/**
- * One node of the marketplace category tree, as the API returns it:
- * main category (Women) › category (Clothing) › sub category
- * (Eastern Ready to wear) › child category (Pishwas). Brands file every
- * product under a leaf; every level above gets its own page.
- */
+
 export type Category = {
   id: string;
   /** URL segment, unique among siblings ("eastern-ready-to-wear"). */
