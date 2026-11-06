@@ -35,6 +35,8 @@ const SORTS: { value: SortKey; label: string }[] = [
 
 const SIZE_ORDER = ["2-3Y", "4-5Y", "6-7Y", "8-9Y", "10-11Y", "XS", "S", "M", "L", "XL"];
 const EASE = [0.22, 1, 0.36, 1] as const;
+/** How long the blurred row shows as a loader before the next products appear. */
+const LOADER_MS = 700;
 const EMPTY: Record<FilterKey, string[]> = {
   category: [],
   fabric: [],
@@ -89,15 +91,19 @@ function sortProducts(products: ProductSummary[], sort: SortKey) {
 
 /**
  * Figma "Trending products": filter chips (each a dropdown of checkboxes),
- * Recommended / New In / Top rated / Budget tabs, a four-column grid, and a
- * blurred teaser row fading out under a floating search bar.
- * Filtering runs on the products already on the page; no extra requests.
+ * Recommended / New In / Top rated / Budget tabs, a four-column grid, and,
+ * only when more products remain, a blurred row under a floating search bar.
+ * That row is the pagination loader: reaching it reveals the next `limit`.
+ * Filtering and paging run on the products already on the page; no extra requests.
  */
-export function TrendingProducts({ products, limit = 8 }: { products: ProductSummary[]; limit?: number }) {
+export function TrendingProducts({ products, limit = 12 }: { products: ProductSummary[]; limit?: number }) {
   const [sort, setSort] = useState<SortKey>("recommended");
   const [selected, setSelected] = useState(EMPTY);
   const [open, setOpen] = useState<FilterKey | null>(null);
+  const [paged, setPaged] = useState({ listKey: "", shown: limit });
+  const [searching, setSearching] = useState(false);
   const filtersRef = useRef<HTMLDivElement>(null);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -117,9 +123,32 @@ export function TrendingProducts({ products, limit = 8 }: { products: ProductSum
     FILTERS.every(({ key }) => selected[key].length === 0 || valuesOf(p, key).some((v) => selected[key].includes(v))),
   );
   const sorted = sortProducts(filtered, sort);
-  const visible = sorted.slice(0, limit);
-  const teaser = sorted.slice(limit, limit + 4);
+  const listKey = `${sort}|${JSON.stringify(selected)}`;
+  // A new sort or filter starts again from the first page.
+  const shown = paged.listKey === listKey ? paged.shown : limit;
+  const visible = sorted.slice(0, shown);
+  const teaser = sorted.slice(shown, shown + 4);
+  const hasMore = teaser.length > 0;
   const activeCount = FILTERS.reduce((n, { key }) => n + selected[key].length, 0);
+
+  // Waits while the search bar has focus, so the field doesn't move mid-typing.
+  useEffect(() => {
+    const loader = loaderRef.current;
+    if (!hasMore || searching || !loader) return;
+    let timer: ReturnType<typeof setTimeout>;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        clearTimeout(timer);
+        if (entry.isIntersecting) timer = setTimeout(() => setPaged({ listKey, shown: shown + limit }), LOADER_MS);
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(loader);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, [hasMore, searching, listKey, shown, limit]);
 
   const toggle = (key: FilterKey, value: string) =>
     setSelected((s) => {
@@ -227,17 +256,22 @@ export function TrendingProducts({ products, limit = 8 }: { products: ProductSum
 
       <AnimatePresence mode="wait" initial={false}>
         <m.ul
-          key={`${sort}|${JSON.stringify(selected)}`}
+          key={listKey}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25, ease: EASE }}
           className="mt-4 grid grid-cols-2 gap-x-4 gap-y-7 md:grid-cols-4 md:gap-x-6"
         >
-          {visible.map((product) => (
-            <li key={product.id}>
+          {visible.map((product, i) => (
+            <m.li
+              key={product.id}
+              initial={i < limit ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: EASE }}
+            >
               <NewArrivalCard product={product} />
-            </li>
+            </m.li>
           ))}
           {visible.length === 0 && (
             <li className="col-span-full py-10 text-center text-sm text-muted">
@@ -250,8 +284,13 @@ export function TrendingProducts({ products, limit = 8 }: { products: ProductSum
         </m.ul>
       </AnimatePresence>
 
-      <div className={cn("relative", teaser.length > 0 ? "mt-7" : "mt-10")}>
-        {teaser.length > 0 && (
+      <div
+        ref={loaderRef}
+        onFocus={() => setSearching(true)}
+        onBlur={() => setSearching(false)}
+        className={cn("relative", hasMore ? "mt-7 overflow-hidden" : "mt-10")}
+      >
+        {hasMore && (
           <>
             <ul
               aria-hidden
@@ -271,7 +310,7 @@ export function TrendingProducts({ products, limit = 8 }: { products: ProductSum
         <div
           className={cn(
             "flex justify-center px-4",
-            teaser.length > 0 && "absolute inset-x-0 top-1/2 -translate-y-1/2",
+            hasMore && "absolute inset-x-0 top-1/2 -translate-y-1/2",
           )}
         >
           <Form

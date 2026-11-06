@@ -93,9 +93,9 @@ export const mockCategories: Category[] = build([
           { name: "Fusion" },
         ],
       },
-      { name: "Accessories" },
-      { name: "Footwear" },
-      { name: "Lingerie & Sleepwear" },
+      // { name: "Accessories" },
+      // { name: "Footwear" },
+      // { name: "Lingerie & Sleepwear" },
     ],
   },
   {
