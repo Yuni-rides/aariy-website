@@ -112,4 +112,19 @@ export const mockBrands: Brand[] = [
     cover: { url: "/images/C/store-cover.png", alt: "Mahpara Couture campaign", width: 800, height: 1120 },
     banner: { url: "/images/C/banner.png", alt: "Mahpara Couture collection", width: 6144, height: 2936 },
   },
+  {
+    id: "br_10",
+    slug: "naqsh-e-gul",
+    name: "Naqsh-e-Gul",
+    verified: true,
+    tagline: "Floral handwork for every celebration.",
+    story:
+      "Naqsh-e-Gul makes formal and festive wear covered in floral embroidery, from velvet lehengas to light lavender anarkalis.",
+    city: "Lahore",
+    productCount: 0,
+    rating: { average: 4.7, count: 1900 },
+    cover: { url: "/images/D/store-cover.jpg", alt: "Naqsh-e-Gul campaign", width: 600, height: 840 },
+    banner: { url: "/images/D/banner.png", alt: "Naqsh-e-Gul collection", width: 6144, height: 2936 },
+
+  },
 ];

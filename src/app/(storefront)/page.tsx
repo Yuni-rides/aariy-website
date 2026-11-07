@@ -29,7 +29,7 @@ export default async function HomePage() {
       productsPerBrand: 2,
       limit: homeContent.trendingStoresLimit,
     }),
-    listProducts({ sort: "newest", pageSize: 48 }),
+    listProducts({ sort: "newest", pageSize: 60 }),
   ]);
 
   return (
