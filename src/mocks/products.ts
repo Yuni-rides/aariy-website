@@ -120,7 +120,7 @@ type ProductImage = {
 };
 type ImageSet = { folder: string; size: number; images: ProductImage[] };
 
-/** Figma product shots, in hero order; brands without their own photos reuse these. */
+/** Figma product shots, in hero order; the placeholder brands reuse these. */
 const DEFAULT_IMAGES: ImageSet = {
   folder: "maria-b",
   size: 272,
@@ -152,33 +152,11 @@ const DEFAULT_IMAGES: ImageSet = {
   ],
 };
 
-/** Brands that sent their own product photos (public/images/brands/<slug>/). */
-const BRAND_IMAGES: Record<string, ImageSet> = {
-  "noor-jahan": {
-    folder: "noor-jahan",
-    size: 158,
-    images: [
-      {
-        file: "brown-embroidered-dress",
-        alt: "Brown embroidered dress",
-        audience: "women",
-        color: "Brown",
-      },
-      {
-        file: "pink-skin",
-        alt: "Pink embroidered suit",
-        audience: "women",
-        color: "Pink",
-      },
-    ],
-  },
-};
-
 const seededProducts: Product[] = seededBrands.flatMap((brand, b) =>
   [0, 1, 2, 3].map((i): Product => {
     const seed = seeds[(b * 3 + i) % seeds.length];
     const n = b * 4 + i + 1;
-    const set = BRAND_IMAGES[brand.slug] ?? DEFAULT_IMAGES;
+    const set = DEFAULT_IMAGES;
     const shots = set.images;
     const { audience, color, file } = shots[(i + b) % shots.length];
     const categoryId =

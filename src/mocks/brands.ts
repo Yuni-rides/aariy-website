@@ -1,17 +1,17 @@
 import type { Brand } from "@/types";
 
-const OWN_ART = new Set(["noor-jahan"]);
-
-const banner = (slug: string, name: string) => ({
-  url: `/images/brands/${OWN_ART.has(slug) ? slug : "maria-b"}/banner.webp`,
+const banner = (name: string) => ({
+  url: "/images/brands/maria-b/banner.webp",
   alt: `${name} collection`,
   width: 1467,
   height: 700,
 });
-const cover = (slug: string, name: string, i: number) =>
-  OWN_ART.has(slug)
-    ? { url: `/images/brands/${slug}/store-cover.png`, alt: `${name} campaign`, width: 377, height: 529 }
-    : { url: `/images/brands/maria-b/store-cover-${(i % 2) + 1}.webp`, alt: `${name} campaign`, width: 500, height: 700 };
+const cover = (name: string, i: number) => ({
+  url: `/images/brands/maria-b/store-cover-${(i % 2) + 1}.webp`,
+  alt: `${name} campaign`,
+  width: 500,
+  height: 700,
+});
 const ratings = [
   { average: 4.5, count: 591000 },
   { average: 4.7, count: 128000 },
@@ -34,8 +34,8 @@ export const seededBrands: Brand[] = [
     city: "Karachi",
     productCount: 0,
     rating: ratings[1],
-    cover: cover("mehr-studio", "Mehr Studio", 1),
-    banner: banner("mehr-studio", "Mehr Studio"),
+    cover: cover("Mehr Studio", 1),
+    banner: banner("Mehr Studio"),
   },
   {
     id: "br_03",
@@ -48,8 +48,8 @@ export const seededBrands: Brand[] = [
     city: "Hyderabad",
     productCount: 0,
     rating: ratings[2],
-    cover: cover("rang-ghar", "Rang Ghar", 2),
-    banner: banner("rang-ghar", "Rang Ghar"),
+    cover: cover("Rang Ghar", 2),
+    banner: banner("Rang Ghar"),
   },
   {
     id: "br_05",
@@ -62,22 +62,8 @@ export const seededBrands: Brand[] = [
     city: "Faisalabad",
     productCount: 0,
     rating: ratings[4],
-    cover: cover("kapra-co", "Kapra & Co", 4),
-    banner: banner("kapra-co", "Kapra & Co"),
-  },
-  {
-    id: "br_06",
-    slug: "noor-jahan",
-    name: "Noor Jahan",
-    verified: true,
-    tagline: "Festive wear with a quiet touch.",
-    story:
-      "Noor Jahan makes festive pieces with subtle embroidery, designed for comfort through long celebrations.",
-    city: "Multan",
-    productCount: 0,
-    rating: ratings[5],
-    cover: cover("noor-jahan", "Noor Jahan", 5),
-    banner: banner("noor-jahan", "Noor Jahan"),
+    cover: cover("Kapra & Co", 4),
+    banner: banner("Kapra & Co"),
   },
 ];
 
@@ -111,5 +97,19 @@ export const mockBrands: Brand[] = [
     rating: { average: 4.6, count: 2100 },
     cover: { url: "/images/B/store-cover.png", alt: "Ruhaan Libas campaign", width: 524, height: 734 },
     banner: { url: "/images/B/banner.png", alt: "Ruhaan Libas collection", width: 1537, height: 734 },
+  },
+  {
+    id: "br_09",
+    slug: "mahpara-couture",
+    name: "Mahpara Couture",
+    verified: true,
+    tagline: "Heritage embroidery in deep, rich colour.",
+    story:
+      "Mahpara Couture makes formal wear with gold and floral handwork, from angrakha anarkalis to embellished sarees, in wine, olive and bottle green.",
+    city: "Islamabad",
+    productCount: 0,
+    rating: { average: 4.8, count: 2700 },
+    cover: { url: "/images/C/store-cover.png", alt: "Mahpara Couture campaign", width: 800, height: 1120 },
+    banner: { url: "/images/C/banner.png", alt: "Mahpara Couture collection", width: 6144, height: 2936 },
   },
 ];

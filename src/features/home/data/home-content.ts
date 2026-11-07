@@ -1,4 +1,4 @@
 export const homeContent = {
-  heroBrandSlugs: ["noor-jahan", "zarveen-couture", "ruhaan-libas"],
+  heroBrandSlugs: ["mahpara-couture", "zarveen-couture", "ruhaan-libas"],
   trendingStoresLimit: 8,
 } as const;
