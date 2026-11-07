@@ -1,20 +1,4 @@
-/**
- * ADD PRODUCTS HERE (mock data, until brands upload through the API).
- *
- * 1. Put the photo in public/images/<folder>/ (e.g. public/images/mens/).
- * 2. Copy one block below to the TOP of the list and change its values.
- *    The top of the list counts as the newest product.
- * 3. Restart the dev server if a home page section still shows the old list.
- *
- * brand:    the brand's slug, as in /brands/<slug> (see mocks/brands.ts).
- * category: the page's address after /categories/, as in
- *           /categories/men/clothing/eastern-wear/waistcoats (see mocks/categories.ts).
- *           It also decides the Men / Women / Kids tab.
- * price:    selling price in rupees. oldPrice (optional) shows it as on sale.
- * images:   first photo is the main one; add more for the product gallery.
- * isNew:    true puts it in New Arrivals and New In, with the "New" badge.
- * sizes:    optional; defaults depend on Men / Women / Kids (see products.ts).
- */
+
 export type NewProduct = {
   name: string;
   brand: string;
@@ -37,7 +21,7 @@ export const newProducts: NewProduct[] = [
     brand: "naqsh-e-gul",
     category: "women/clothing/eastern-ready-to-wear/anarkali",
     price: 43500,
-    images: ["/images/D/01_Lavender_Elegance_in_a_Sunlit_Courtyard_1080.jpg"],
+    images: ["/images/D/01_Lavender_Elegance_in_a_Sunlit_Courtyard_1080.png"],
     color: "Lavender",
     fabric: "Net",
     occasion: "Wedding",

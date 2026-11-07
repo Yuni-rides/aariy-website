@@ -124,7 +124,7 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: { average: 4.7, count: 1900 },
     cover: { url: "/images/D/store-cover.jpg", alt: "Naqsh-e-Gul campaign", width: 600, height: 840 },
-    banner: { url: "/images/D/banner.png", alt: "Naqsh-e-Gul collection", width: 6144, height: 2936 },
+    banner: { url: "/images/D/banner.png", alt: "Naqsh-e-Gul collection", width: 5848, height: 2796 },
 
   },
 ];
