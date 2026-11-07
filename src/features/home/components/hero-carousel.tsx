@@ -119,7 +119,8 @@ export function HeroCarousel({ slides }: { slides: BrandShowcase[] }) {
                     aria-hidden
                     className="text-4xl font-light uppercase leading-none tracking-[0.12em] lg:text-5xl"
                   >
-                    {brand.name.replace(/\s+/g, ".")}.
+                    {/* The zero-width space lets a long name wrap after its dot. */}
+                    {brand.name.replace(/\s+/g, ".​")}.
                   </p>
                 )}
               </m.div>

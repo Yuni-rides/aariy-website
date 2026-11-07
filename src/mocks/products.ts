@@ -1,6 +1,6 @@
 import type { Audience, Product, SizeChart } from "@/types";
 import { findCategoryById, findCategoryByPath } from "@/lib/categories";
-import { mockBrands } from "./brands";
+import { mockBrands, seededBrands } from "./brands";
 import { mockCategories } from "./categories";
 import { newProducts, type NewProduct } from "./new-products";
 import { mockRating } from "./reviews";
@@ -172,30 +172,9 @@ const BRAND_IMAGES: Record<string, ImageSet> = {
       },
     ],
   },
-  "saba-atelier": {
-    folder: "saba-atelier",
-    size: 158,
-    images: [
-      {
-        file: "black-dress",
-        alt: "Black formal dress",
-        audience: "women",
-        color: "Black",
-      },
-      {
-        file: "pink-dress",
-        alt: "Pink formal dress",
-        audience: "women",
-        color: "Pink",
-      },
-    ],
-  },
 };
 
-/** Prices shown on the Figma hero tiles (first brand). */
-const FIGMA_PRICES = [11000, 3000, 4000, 7000];
-
-const seededProducts: Product[] = mockBrands.flatMap((brand, b) =>
+const seededProducts: Product[] = seededBrands.flatMap((brand, b) =>
   [0, 1, 2, 3].map((i): Product => {
     const seed = seeds[(b * 3 + i) % seeds.length];
     const n = b * 4 + i + 1;
@@ -223,11 +202,11 @@ const seededProducts: Product[] = mockBrands.flatMap((brand, b) =>
       },
       description: `${seed.name} by ${brand.name}. ${brand.tagline} Cut for an easy fit and finished with care, ready to wear straight out of the bag.`,
       price: {
-        amount: (b === 0 ? FIGMA_PRICES[i] : seed.price + b * 200) * 100,
+        amount: (seed.price + b * 200) * 100,
         currency: "PKR",
       },
       compareAtPrice:
-        seed.compareAt && b !== 0
+        seed.compareAt
           ? { amount: (seed.compareAt + b * 200) * 100, currency: "PKR" }
           : undefined,
       // Up to three gallery shots, never the same photo twice.

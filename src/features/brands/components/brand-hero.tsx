@@ -65,7 +65,8 @@ export function BrandHero({
                 aria-hidden
                 className="px-2 text-center font-display text-[13px] leading-tight md:text-[15px]"
               >
-                {brand.name.replace(/\s+/g, ".")}
+                {/* The zero-width space lets a long name wrap after its dot. */}
+                {brand.name.replace(/\s+/g, ".​")}
               </span>
             )}
           </span>

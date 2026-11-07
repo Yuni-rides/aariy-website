@@ -1,6 +1,6 @@
 import type { Brand } from "@/types";
 
-const OWN_ART = new Set(["maria-b", "noor-jahan", "saba-atelier"]);
+const OWN_ART = new Set(["noor-jahan"]);
 
 const banner = (slug: string, name: string) => ({
   url: `/images/brands/${OWN_ART.has(slug) ? slug : "maria-b"}/banner.webp`,
@@ -9,7 +9,7 @@ const banner = (slug: string, name: string) => ({
   height: 700,
 });
 const cover = (slug: string, name: string, i: number) =>
-  OWN_ART.has(slug) && slug !== "maria-b"
+  OWN_ART.has(slug)
     ? { url: `/images/brands/${slug}/store-cover.png`, alt: `${name} campaign`, width: 377, height: 529 }
     : { url: `/images/brands/maria-b/store-cover-${(i % 2) + 1}.webp`, alt: `${name} campaign`, width: 500, height: 700 };
 const ratings = [
@@ -21,30 +21,8 @@ const ratings = [
   { average: 4.6, count: 157000 },
 ];
 
-const BRAND_NAMES = [
-  "Maria B",
-  "Mehr Studio",
-  "Rang Ghar",
-  "Saba Atelier",
-  "Kapra & Co",
-  "Noor Jahan",
-];
-
-export const mockBrands: Brand[] = [
-  {
-    id: "br_01",
-    slug: "maria-b",
-    name: "Maria B",
-    verified: true,
-    tagline: "Luxury pret and festive wear.",
-    story:
-      "Maria B designs ready-to-wear and festive collections with signature embroidery, for women and kids.",
-    city: "Lahore",
-    productCount: 0,
-    rating: ratings[0],
-    cover: cover("maria-b", BRAND_NAMES[0], 0),
-    banner: banner("maria-b", "Maria B"),
-  },
+/** The placeholder brands; products.ts generates four products for each of these. */
+export const seededBrands: Brand[] = [
   {
     id: "br_02",
     slug: "mehr-studio",
@@ -56,7 +34,7 @@ export const mockBrands: Brand[] = [
     city: "Karachi",
     productCount: 0,
     rating: ratings[1],
-    cover: cover("mehr-studio", BRAND_NAMES[1], 1),
+    cover: cover("mehr-studio", "Mehr Studio", 1),
     banner: banner("mehr-studio", "Mehr Studio"),
   },
   {
@@ -70,22 +48,8 @@ export const mockBrands: Brand[] = [
     city: "Hyderabad",
     productCount: 0,
     rating: ratings[2],
-    cover: cover("rang-ghar", BRAND_NAMES[2], 2),
+    cover: cover("rang-ghar", "Rang Ghar", 2),
     banner: banner("rang-ghar", "Rang Ghar"),
-  },
-  {
-    id: "br_04",
-    slug: "saba-atelier",
-    name: "Saba Atelier",
-    verified: true,
-    tagline: "Occasion formals, finished by hand.",
-    story:
-      "Saba Atelier creates formal wear with hand embellishment for weddings and festive evenings.",
-    city: "Islamabad",
-    productCount: 0,
-    rating: ratings[3],
-    cover: cover("saba-atelier", BRAND_NAMES[3], 3),
-    banner: banner("saba-atelier", "Saba Atelier"),
   },
   {
     id: "br_05",
@@ -98,7 +62,7 @@ export const mockBrands: Brand[] = [
     city: "Faisalabad",
     productCount: 0,
     rating: ratings[4],
-    cover: cover("kapra-co", BRAND_NAMES[4], 4),
+    cover: cover("kapra-co", "Kapra & Co", 4),
     banner: banner("kapra-co", "Kapra & Co"),
   },
   {
@@ -112,7 +76,40 @@ export const mockBrands: Brand[] = [
     city: "Multan",
     productCount: 0,
     rating: ratings[5],
-    cover: cover("noor-jahan", BRAND_NAMES[5], 5),
+    cover: cover("noor-jahan", "Noor Jahan", 5),
     banner: banner("noor-jahan", "Noor Jahan"),
+  },
+];
+
+/** Every store. Brands added below get their products from new-products.ts only. */
+export const mockBrands: Brand[] = [
+  ...seededBrands,
+  {
+    id: "br_07",
+    slug: "zarveen-couture",
+    name: "Zarveen Couture",
+    verified: true,
+    tagline: "Bridal and festive couture in rich jewel tones.",
+    story:
+      "Zarveen Couture makes hand-embellished lehengas, anarkalis and sarees for weddings and festive evenings, in deep maroons, plums and emeralds.",
+    city: "Lahore",
+    productCount: 0,
+    rating: { average: 4.7, count: 3200 },
+    cover: { url: "/images/A/store-cover.png", alt: "Zarveen Couture campaign", width: 524, height: 734 },
+    banner: { url: "/images/A/banner.png", alt: "Zarveen Couture collection", width: 1533, height: 734 },
+  },
+  {
+    id: "br_08",
+    slug: "ruhaan-libas",
+    name: "Ruhaan Libas",
+    verified: true,
+    tagline: "Soft pastels, fine embroidery.",
+    story:
+      "Ruhaan Libas designs formal wear in blush, sage and mauve, with delicate floral embroidery and light net dupattas.",
+    city: "Karachi",
+    productCount: 0,
+    rating: { average: 4.6, count: 2100 },
+    cover: { url: "/images/B/store-cover.png", alt: "Ruhaan Libas campaign", width: 524, height: 734 },
+    banner: { url: "/images/B/banner.png", alt: "Ruhaan Libas collection", width: 1537, height: 734 },
   },
 ];
