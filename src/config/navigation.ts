@@ -6,15 +6,20 @@ export type NavItem = {
   children?: NavItem[];
 };
 
-/** Centre pill nav in the header (bottom tab bar on mobile). Icons are mapped in site-header. */
-export type IconNavKey = "home" | "categories" | "stores" | "cart" | "help" | "orders" | "sale";
+export type IconNavKey =
+  | "home"
+  | "categories"
+  | "stores"
+  | "cart"
+  | "help"
+  | "orders"
+  | "sale";
 
 export const iconNav: { key: IconNavKey; label: string; href: string }[] = [
   { key: "home", label: "Home", href: routes.home() },
   { key: "categories", label: "Categories", href: routes.collection("all") },
   { key: "stores", label: "Stores", href: routes.brands() },
   { key: "cart", label: "Basket", href: routes.cart() },
-  { key: "help", label: "Help", href: routes.contact() },
   { key: "orders", label: "Orders", href: routes.orders() },
   { key: "sale", label: "Sale", href: routes.collection("sale") },
 ];
@@ -43,7 +48,10 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { label: "Terms of Service", href: routes.policy("terms") },
       { label: "Privacy Policy", href: routes.policy("privacy") },
-      { label: "Prohibited Products", href: routes.policy("prohibited-products") },
+      {
+        label: "Prohibited Products",
+        href: routes.policy("prohibited-products"),
+      },
     ],
   },
 ];

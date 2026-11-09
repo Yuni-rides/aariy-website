@@ -1,8 +1,3 @@
-/**
- * Countries offered in the phone number picker: Pakistan first (the default),
- * then where most Pakistani customers and sellers abroad live. To offer
- * another country, add a row here and its flag in phone-input.tsx.
- */
 export const phoneCountries = [
   { code: "PK", name: "Pakistan", dial: "92" },
   { code: "AE", name: "United Arab Emirates", dial: "971" },

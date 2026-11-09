@@ -1,7 +1,3 @@
-/**
- * Static SEO copy for fixed pages. Dynamic pages (product, brand, collection)
- * build their metadata from data in generateMetadata.
- */
 export const seoPages = {
   home: {
     title: "Aariy | Women's Ready-to-Wear from Verified Pakistani Brands",
@@ -11,7 +7,8 @@ export const seoPages = {
   },
   brands: {
     title: "All Brands",
-    description: "Browse every verified fashion brand on Aariy and shop their latest ready-to-wear collections.",
+    description:
+      "Browse every verified fashion brand on Aariy and shop their latest ready-to-wear collections.",
     path: "/brands",
   },
   search: {
@@ -41,15 +38,24 @@ export const seoPages = {
   },
   contact: {
     title: "Contact Us",
-    description: "Questions about an order or a brand? Send us a message and our support team will reply.",
+    description:
+      "Questions about an order or a brand? Send us a message and our support team will reply.",
     path: "/contact",
   },
   sellerRegister: {
     title: "Become a Seller",
-    description: "Sell your brand on Aariy. Tell us about your business and our team will get in touch.",
+    description:
+      "Sell your brand on Aariy. Tell us about your business and our team will get in touch.",
     path: "/become-a-seller",
   },
 } as const;
 
 /** Routes that must never be indexed. Mirrored in robots.ts. */
-export const noIndexPaths = ["/cart", "/wishlist", "/checkout", "/login", "/account", "/search"];
+export const noIndexPaths = [
+  "/cart",
+  "/wishlist",
+  "/checkout",
+  "/login",
+  "/account",
+  "/search",
+];
