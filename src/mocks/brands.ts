@@ -125,6 +125,20 @@ export const mockBrands: Brand[] = [
     rating: { average: 4.7, count: 1900 },
     cover: { url: "/images/D/store-cover.jpg", alt: "Naqsh-e-Gul campaign", width: 600, height: 840 },
     banner: { url: "/images/D/banner.png", alt: "Naqsh-e-Gul collection", width: 5848, height: 2796 },
+  },
+  {
+    id: "br_11",
+    slug: "sitara-zewar",
+    name: "Sitara Zewar",
+    verified: true,
+    tagline: "Kundan, pearls and polki for every occasion.",
+    story:
+      "Sitara Zewar makes gold-plated bridal and festive jewelry, from kundan chokers and pearl jhumkas to everyday crystal studs and pendants.",
+    city: "Karachi",
+    productCount: 0,
+    rating: { average: 4.8, count: 1600 },
+    cover: { url: "/images/E/store-cover.png", alt: "Sitara Zewar campaign", width: 524, height: 734 },
+    banner: { url: "/images/E/banner.png", alt: "Sitara Zewar collection", width: 1536, height: 734 },
 
   },
 ];

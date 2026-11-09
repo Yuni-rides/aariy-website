@@ -275,7 +275,9 @@ function toProduct(entry: NewProduct, index: number): Product {
       stock: 6,
     })),
     material: entry.fabric,
-    care: ["Gentle wash in cold water", "Do not bleach", "Iron on reverse at medium heat"],
+    care: entry.category.startsWith("jewelry/")
+      ? ["Keep away from water, perfume and lotions", "Wipe with a soft dry cloth after wearing", "Store in the box it came in"]
+      : ["Gentle wash in cold water", "Do not bleach", "Iron on reverse at medium heat"],
     dispatch: { minDays: 2, maxDays: 4 },
     isNew: entry.isNew ?? false,
     inStock: true,

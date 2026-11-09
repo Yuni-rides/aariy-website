@@ -122,5 +122,17 @@ export const mockCategories: Category[] = build([
     ],
   },
   { name: "Beauty", icon: "/images/categories/beauty.png", tint: "#fdd9dd" },
-  { name: "Jewelry", icon: "/images/categories/jewelry.png", tint: "#fdf2c4" },
+  {
+    name: "Jewelry",
+    icon: "/images/categories/jewelry.png",
+    tint: "#fdf2c4",
+    children: [
+      { name: "Necklaces" },
+      { name: "Earrings" },
+      { name: "Bangles & Bracelets", slug: "bangles-bracelets" },
+      { name: "Rings" },
+      { name: "Maang Tikka" },
+      { name: "Jewelry Sets" },
+    ],
+  },
 ]);
