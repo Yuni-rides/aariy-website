@@ -58,7 +58,8 @@ export function BrandHero({
                 alt={brand.logo.alt}
                 width={96}
                 height={96}
-                className="size-full object-cover"
+                sizes="96px"
+                className="size-full object-contain p-1.5"
               />
             ) : (
               <span

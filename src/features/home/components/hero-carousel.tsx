@@ -112,7 +112,8 @@ export function HeroCarousel({ slides }: { slides: BrandShowcase[] }) {
                     alt={brand.name}
                     width={brand.wordmark.width}
                     height={brand.wordmark.height}
-                    className="h-10 w-auto md:h-12"
+                    sizes="320px"
+                    className="h-20 w-auto max-w-full object-contain object-left drop-shadow-md md:h-28"
                   />
                 ) : (
                   <p

@@ -37,6 +37,8 @@ export const mockCategories: Category[] = build([
               { name: "Kurta Shalwar", image: "/images/mens/kurta1.jpg" },
               { name: "Waistcoats", image: "/images/mens/coat1.jpg" },
               { name: "Prince Coats", image: "/images/mens/princecoat2.jpg" },
+              { name: "Sherwani", image: "/images/F/product1.png" },
+              { name: "Shalwar & Trousers", image: "/images/F/product5.png" },
             ],
           },
         ],
@@ -75,14 +77,14 @@ export const mockCategories: Category[] = build([
           //     ["Shawl Suits", "pishwas"],
           //   ]),
           // },
-          // {
-          //   name: "Western",
-          //   children: leaves([
-          //     ["Tops", "kaftan"],
-          //     ["Dresses", "maxi"],
-          //     ["Co-ords", "kurta-set"],
-          //   ]),
-          // },
+          {
+            name: "Western",
+            children: [
+              { name: "Co-ords", image: "/images/rangGhar/product6.png" },
+              { name: "Jackets & Knitwear", image: "/images/rangGhar/product1.png" },
+              { name: "Skirts", image: "/images/rangGhar/product4.png" },
+            ],
+          },
           {
             name: "Modest Wear",
             children: leaves([

@@ -12,6 +12,13 @@ const cover = (name: string, i: number) => ({
   width: 500,
   height: 700,
 });
+const logo = (folder: string, name: string, width: number, height: number) => ({
+  url: `/images/${folder}/logo.png`,
+  alt: `${name} logo`,
+  width,
+  height,
+});
+
 const ratings = [
   { average: 4.5, count: 591000 },
   { average: 4.7, count: 128000 },
@@ -23,34 +30,6 @@ const ratings = [
 
 /** The placeholder brands; products.ts generates four products for each of these. */
 export const seededBrands: Brand[] = [
-  {
-    id: "br_02",
-    slug: "mehr-studio",
-    name: "Mehr Studio",
-    verified: true,
-    tagline: "Modern co-ords for the city.",
-    story:
-      "Mehr Studio designs relaxed co-ord sets that move from office to evening, in breathable cotton and linen blends.",
-    city: "Karachi",
-    productCount: 0,
-    rating: ratings[1],
-    cover: cover("Mehr Studio", 1),
-    banner: banner("Mehr Studio"),
-  },
-  {
-    id: "br_03",
-    slug: "rang-ghar",
-    name: "Rang Ghar",
-    verified: true,
-    tagline: "Colour, print and heritage craft.",
-    story:
-      "Rang Ghar revives traditional dyeing techniques from Sindh and Punjab in contemporary silhouettes.",
-    city: "Hyderabad",
-    productCount: 0,
-    rating: ratings[2],
-    cover: cover("Rang Ghar", 2),
-    banner: banner("Rang Ghar"),
-  },
   {
     id: "br_05",
     slug: "kapra-co",
@@ -71,6 +50,48 @@ export const seededBrands: Brand[] = [
 export const mockBrands: Brand[] = [
   ...seededBrands,
   {
+    id: "br_02",
+    slug: "mehr-studio",
+    name: "Mehar Studio",
+    verified: true,
+    tagline: "Menswear for weddings, Eid and every day.",
+    story:
+      "Mehar Studio makes menswear in rich, quiet colours, from embroidered sherwanis and prince coats to everyday kurta shalwar and waistcoats.",
+    city: "Karachi",
+    productCount: 0,
+    rating: ratings[1],
+    cover: {
+      url: "/images/F/store-cover.png",
+      alt: "Mehar Studio campaign",
+      width: 524,
+      height: 734,
+    },
+    banner: {
+      url: "/images/F/banner.png",
+      alt: "Mehar Studio collection",
+      width: 2195,
+      height: 1049,
+    },
+    logo: logo("F", "Mehar Studio", 1536, 1024),
+    wordmark: logo("F", "Mehar Studio", 1536, 1024),
+  },
+  {
+    id: "br_03",
+    slug: "rang-ghar",
+    name: "Rang Ghar",
+    verified: true,
+    tagline: "Rich maroons for every day and every season.",
+    story:
+      "Rang Ghar makes easy womenswear in deep maroon, navy and cream, from knitwear and co-ords to embroidered kurta sets.",
+    city: "Hyderabad",
+    productCount: 0,
+    rating: ratings[2],
+    cover: { url: "/images/rangGhar/store-cover.png", alt: "Rang Ghar campaign", width: 524, height: 734 },
+    banner: { url: "/images/rangGhar/banner.png", alt: "Rang Ghar collection", width: 2306, height: 1101 },
+    logo: logo("rangGhar", "Rang Ghar", 2172, 724),
+    wordmark: logo("rangGhar", "Rang Ghar", 2172, 724),
+  },
+  {
     id: "br_07",
     slug: "zarveen-couture",
     name: "Zarveen Couture",
@@ -81,8 +102,20 @@ export const mockBrands: Brand[] = [
     city: "Lahore",
     productCount: 0,
     rating: { average: 4.7, count: 3200 },
-    cover: { url: "/images/A/store-cover.png", alt: "Zarveen Couture campaign", width: 524, height: 734 },
-    banner: { url: "/images/A/banner.png", alt: "Zarveen Couture collection", width: 1533, height: 734 },
+    cover: {
+      url: "/images/A/store-cover.png",
+      alt: "Zarveen Couture campaign",
+      width: 524,
+      height: 734,
+    },
+    banner: {
+      url: "/images/A/banner.png",
+      alt: "Zarveen Couture collection",
+      width: 1533,
+      height: 734,
+    },
+    logo: logo("A", "Zarveen Couture", 1254, 1254),
+    wordmark: logo("A", "Zarveen Couture", 1254, 1254),
   },
   {
     id: "br_08",
@@ -95,8 +128,20 @@ export const mockBrands: Brand[] = [
     city: "Karachi",
     productCount: 0,
     rating: { average: 4.6, count: 2100 },
-    cover: { url: "/images/B/store-cover.png", alt: "Ruhaan Libas campaign", width: 524, height: 734 },
-    banner: { url: "/images/B/banner.png", alt: "Ruhaan Libas collection", width: 1537, height: 734 },
+    cover: {
+      url: "/images/B/store-cover.png",
+      alt: "Ruhaan Libas campaign",
+      width: 524,
+      height: 734,
+    },
+    banner: {
+      url: "/images/B/banner.png",
+      alt: "Ruhaan Libas collection",
+      width: 1537,
+      height: 734,
+    },
+    logo: logo("B", "Ruhaan Libas", 2172, 724),
+    wordmark: logo("B", "Ruhaan Libas", 2172, 724),
   },
   {
     id: "br_09",
@@ -109,8 +154,20 @@ export const mockBrands: Brand[] = [
     city: "Islamabad",
     productCount: 0,
     rating: { average: 4.8, count: 2700 },
-    cover: { url: "/images/C/store-cover.png", alt: "Mahpara Couture campaign", width: 800, height: 1120 },
-    banner: { url: "/images/C/banner.png", alt: "Mahpara Couture collection", width: 6144, height: 2936 },
+    cover: {
+      url: "/images/C/store-cover.png",
+      alt: "Mahpara Couture campaign",
+      width: 800,
+      height: 1120,
+    },
+    banner: {
+      url: "/images/C/banner.png",
+      alt: "Mahpara Couture collection",
+      width: 6144,
+      height: 2936,
+    },
+    logo: logo("C", "Mahpara Couture", 2172, 724),
+    wordmark: logo("C", "Mahpara Couture", 2172, 724),
   },
   {
     id: "br_10",
@@ -123,8 +180,20 @@ export const mockBrands: Brand[] = [
     city: "Lahore",
     productCount: 0,
     rating: { average: 4.7, count: 1900 },
-    cover: { url: "/images/D/store-cover.jpg", alt: "Naqsh-e-Gul campaign", width: 600, height: 840 },
-    banner: { url: "/images/D/banner.png", alt: "Naqsh-e-Gul collection", width: 5848, height: 2796 },
+    cover: {
+      url: "/images/D/store-cover.jpg",
+      alt: "Naqsh-e-Gul campaign",
+      width: 600,
+      height: 840,
+    },
+    banner: {
+      url: "/images/D/banner.png",
+      alt: "Naqsh-e-Gul collection",
+      width: 5848,
+      height: 2796,
+    },
+    logo: logo("D", "Naqsh-e-Gul", 2172, 724),
+    wordmark: logo("D", "Naqsh-e-Gul", 2172, 724),
   },
   {
     id: "br_11",
@@ -137,8 +206,19 @@ export const mockBrands: Brand[] = [
     city: "Karachi",
     productCount: 0,
     rating: { average: 4.8, count: 1600 },
-    cover: { url: "/images/E/store-cover.png", alt: "Sitara Zewar campaign", width: 524, height: 734 },
-    banner: { url: "/images/E/banner.png", alt: "Sitara Zewar collection", width: 1536, height: 734 },
-
+    cover: {
+      url: "/images/E/store-cover.png",
+      alt: "Sitara Zewar campaign",
+      width: 524,
+      height: 734,
+    },
+    banner: {
+      url: "/images/E/banner.png",
+      alt: "Sitara Zewar collection",
+      width: 1536,
+      height: 734,
+    },
+    logo: logo("E", "Sitara Zewar", 1448, 1086),
+    wordmark: logo("E", "Sitara Zewar", 1448, 1086),
   },
 ];
