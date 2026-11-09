@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { Button, Field, Input, Textarea } from "@/components/ui";
+import { Button, Field, Input, PhoneInput, Textarea } from "@/components/ui";
 import { contactAction, type ContactState } from "../actions";
 
 /** Creates a support ticket visible in the admin portal (SOW §3.9). */
@@ -34,8 +34,8 @@ export function ContactForm() {
       <Field label="Email" name="email" error={errors.email}>
         <Input name="email" defaultValue={values.email} type="email" autoComplete="email" required error={errors.email} />
       </Field>
-      <Field label="Phone (optional)" name="phone">
-        <Input name="phone" defaultValue={values.phone} type="tel" autoComplete="tel" />
+      <Field label="Phone (optional)" name="phone" error={errors.phone}>
+        <PhoneInput name="phone" defaultValue={values.phone} defaultCountry={values.phoneCountry} error={errors.phone} />
       </Field>
       <Field label="Order number (optional)" name="orderNumber">
         <Input name="orderNumber" defaultValue={values.orderNumber} placeholder="AR-100000" />

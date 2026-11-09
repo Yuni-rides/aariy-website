@@ -1,5 +1,6 @@
 "use server";
 
+import { phoneFromForm } from "@/lib/phone";
 import { formValues, toFieldErrors } from "@/lib/validation";
 import { placeOrder } from "@/services";
 import type { ActionResult } from "@/types";
@@ -19,7 +20,7 @@ export async function placeOrderAction(_prev: PlaceOrderState, formData: FormDat
     return { ok: false, error: "Your basket could not be read. Please refresh and try again." };
   }
 
-  const parsed = checkoutSchema.safeParse({ ...Object.fromEntries(formData), lines });
+  const parsed = checkoutSchema.safeParse({ ...Object.fromEntries(formData), phone: phoneFromForm(formData), lines });
   if (!parsed.success) {
     return {
       ok: false,

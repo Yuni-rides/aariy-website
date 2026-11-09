@@ -21,5 +21,6 @@ export const routes = {
   order: (orderNumber: string) => `/account/orders/${orderNumber}`,
   orderReturn: (orderNumber: string) => `/account/orders/${orderNumber}/return`,
   contact: () => "/contact",
+  sellerRegister: () => "/become-a-seller",
   policy: (slug: string) => `/policies/${slug}`,
 } as const;

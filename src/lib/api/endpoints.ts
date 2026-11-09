@@ -31,4 +31,5 @@ export const endpoints = {
   order: (orderNumber: string) => `/v1/store/orders/${orderNumber}`,
   returns: (orderNumber: string) => `/v1/store/orders/${orderNumber}/returns`,
   supportTickets: "/v1/store/support/tickets",
+  sellerApplications: "/v1/store/seller-applications",
 } as const;

@@ -44,6 +44,11 @@ export const seoPages = {
     description: "Questions about an order or a brand? Send us a message and our support team will reply.",
     path: "/contact",
   },
+  sellerRegister: {
+    title: "Become a Seller",
+    description: "Sell your brand on Aariy. Tell us about your business and our team will get in touch.",
+    path: "/become-a-seller",
+  },
 } as const;
 
 /** Routes that must never be indexed. Mirrored in robots.ts. */

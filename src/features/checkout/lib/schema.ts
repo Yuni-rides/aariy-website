@@ -1,9 +1,10 @@
 import { z } from "zod";
-import { PROVINCES, pkPhone } from "@/lib/validation";
+import { phoneSchema } from "@/lib/phone";
+import { PROVINCES } from "@/lib/validation";
 
 export const checkoutSchema = z.object({
   fullName: z.string().trim().min(2, "Enter your full name"),
-  phone: pkPhone,
+  phone: phoneSchema,
   email: z.union([z.literal(""), z.email("Enter a valid email")]).optional(),
   line1: z.string().trim().min(5, "Enter your street address"),
   line2: z.string().trim().optional(),

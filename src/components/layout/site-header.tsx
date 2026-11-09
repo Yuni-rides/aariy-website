@@ -32,13 +32,12 @@ export function SiteHeader() {
 
         <IconNav />
 
-        <div className="flex justify-end">
+        <div className="flex items-center justify-end gap-2">
           <div className="flex items-center gap-0.5 rounded-full bg-surface p-1 shadow-pill">
             <Link href={routes.search()} className={pillButton} aria-label="Search">
               <SearchIcon width={18} height={18} />
             </Link>
             <WishlistLink className={pillButton} />
-            {/* Until the session is known, point at /account: it sends signed-out visitors to sign-in anyway. */}
             <Suspense
               fallback={
                 <Link href={routes.account()} className={pillButton} aria-label="My account">
@@ -49,6 +48,14 @@ export function SiteHeader() {
               <SessionAccountLink />
             </Suspense>
           </div>
+          <Link
+            href={routes.sellerRegister()}
+            className="inline-flex h-11 shrink-0 items-center rounded-full bg-accent px-4 text-sm font-semibold text-accent-ink shadow-pill transition-colors hover:bg-accent-hover"
+          >
+            {/* Short label on phones, where the header has room for little else. */}
+            <span className="sm:hidden">Sell</span>
+            <span className="hidden sm:inline">Become a seller</span>
+          </Link>
         </div>
       </div>
     </header>

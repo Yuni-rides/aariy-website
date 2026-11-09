@@ -1,4 +1,4 @@
-import { Field, Input, Select } from "@/components/ui";
+import { Field, Input, PhoneInput, Select } from "@/components/ui";
 import { PROVINCES } from "@/lib/validation";
 
 type AddressFieldsProps = {
@@ -16,16 +16,7 @@ export function AddressFields({ errors = {}, values = {} }: AddressFieldsProps) 
         </Field>
       </div>
       <Field label="Mobile number" name="phone" error={errors.phone} hint="For delivery updates and COD confirmation">
-        <Input
-          name="phone"
-          type="tel"
-          inputMode="tel"
-          autoComplete="tel"
-          placeholder="0300 1234567"
-          required
-          defaultValue={values.phone}
-          error={errors.phone}
-        />
+        <PhoneInput name="phone" required defaultValue={values.phone} defaultCountry={values.phoneCountry} error={errors.phone} />
       </Field>
       <Field label="Email (optional)" name="email" error={errors.email}>
         <Input name="email" type="email" autoComplete="email" defaultValue={values.email} error={errors.email} />
