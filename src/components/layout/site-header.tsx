@@ -7,6 +7,7 @@ import { WishlistLink } from "@/features/wishlist/components/wishlist-link";
 import { getSessionToken } from "@/lib/session";
 import { AccountLink } from "./account-link";
 import { IconNav } from "./icon-nav";
+import { Logo } from "./logo";
 
 const pillButton = "relative inline-flex size-9 items-center justify-center rounded-full text-muted hover:bg-subtle hover:text-ink";
 
@@ -25,9 +26,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 bg-bg">
       <div className="container-site grid h-18 grid-cols-[1fr_auto] items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
-        <Link href={routes.home()} className="text-2xl font-bold tracking-tight" aria-label={`${siteConfig.name} home`}>
-          {/* Swap for the Figma logo: <Image src="/images/brand/logo.svg" … /> */}
-          {siteConfig.name}
+        <Link href={routes.home()} className="w-fit" aria-label={`${siteConfig.name} home`}>
+          <Logo priority className="h-11 md:h-12" />
         </Link>
 
         <IconNav />

@@ -2,6 +2,7 @@ import { cacheLife } from "next/cache";
 import Link from "next/link";
 import { footerNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
+import { Logo } from "./logo";
 
 export async function SiteFooter() {
   "use cache";
@@ -11,7 +12,7 @@ export async function SiteFooter() {
     <footer className="mt-24 border-t border-line bg-surface pb-16 md:pb-0">
       <div className="container-site grid gap-10 py-14 md:grid-cols-[1.5fr_repeat(3,1fr)]">
         <div className="max-w-xs">
-          <p className="font-display text-2xl">{siteConfig.name}</p>
+          <Logo className="h-14" />
           <p className="mt-3 text-sm text-muted">{siteConfig.tagline}</p>
           <p className="mt-6 text-sm">
             <a

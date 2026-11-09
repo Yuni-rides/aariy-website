@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { siteConfig } from "@/config/site";
+import { Logo } from "@/components/layout/logo";
 import { OtpLoginForm } from "./otp-login-form";
 
 export function SignInPanel({
@@ -22,9 +22,7 @@ export function SignInPanel({
         />
       </div>
       <div className="flex flex-col justify-center px-4 py-8 sm:px-8 md:py-10">
-        <p className="text-center font-display text-4xl font-bold tracking-tight text-[#1a2a5e]">
-          {siteConfig.name}
-        </p>
+        <Logo priority className="mx-auto h-16" />
         <h2
           id={titleId}
           className="mx-auto mb-8 mt-6 max-w-[16rem] text-center font-display text-2xl font-semibold leading-snug"

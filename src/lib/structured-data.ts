@@ -12,7 +12,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: siteConfig.legalName,
     url: siteConfig.url,
-    logo: absoluteUrl("/logo.svg"),
+    logo: absoluteUrl("/logo.png"),
     sameAs: Object.values(siteConfig.social),
     contactPoint: {
       "@type": "ContactPoint",
