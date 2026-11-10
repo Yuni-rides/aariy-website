@@ -13,7 +13,7 @@ export function SignInPanel({
     <div className="grid w-full overflow-hidden rounded-[1.25rem] bg-surface p-3 md:grid-cols-2 md:gap-3">
       <div className="relative hidden min-h-[34rem] overflow-hidden rounded-2xl bg-subtle md:block">
         <Image
-          src="/loginSideImage.png"
+          src="/loginSideImage.webp"
           alt=""
           fill
           sizes="(min-width: 768px) 26rem, 0px"

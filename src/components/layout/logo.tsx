@@ -12,7 +12,7 @@ export function Logo({
 }) {
   return (
     <Image
-      src="/logo.png"
+      src="/logo.webp"
       alt={siteConfig.name}
       width={993}
       height={411}

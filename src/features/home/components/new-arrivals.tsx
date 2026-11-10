@@ -8,9 +8,9 @@ import type { Audience, ProductSummary } from "@/types";
 import { NewArrivalCard } from "./new-arrival-card";
 
 const TABS: { value: Audience; label: string; icon: string }[] = [
-  { value: "men", label: "Men", icon: "/images/categories/men.png" },
-  { value: "women", label: "Women", icon: "/images/categories/women.png" },
-  { value: "kids", label: "Kids", icon: "/images/categories/kids.png" },
+  { value: "men", label: "Men", icon: "/images/categories/men.webp" },
+  { value: "women", label: "Women", icon: "/images/categories/women.webp" },
+  { value: "kids", label: "Kids", icon: "/images/categories/kids.webp" },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;

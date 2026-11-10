@@ -15,7 +15,7 @@ function build(drafts: Draft[], parent = "cat"): Category[] {
 const IMG = "/images/categories/women-clothing";
 // The Figma only has Eastern Ready to wear art; other sub categories reuse it for now.
 const leaves = (items: [name: string, image: string][]): Draft[] =>
-  items.map(([name, image]) => ({ name, image: `${IMG}/${image}.png` }));
+  items.map(([name, image]) => ({ name, image: `${IMG}/${image}.webp` }));
 
 /**
  * Marketplace category tree. Brands file each product under a leaf; the
@@ -25,7 +25,7 @@ const leaves = (items: [name: string, image: string][]): Draft[] =>
 export const mockCategories: Category[] = build([
   {
     name: "Men",
-    icon: "/images/categories/men.png",
+    icon: "/images/categories/men.webp",
     tint: "#c9dcfa",
     children: [
       {
@@ -34,11 +34,11 @@ export const mockCategories: Category[] = build([
           {
             name: "Eastern Wear",
             children: [
-              { name: "Kurta Shalwar", image: "/images/mens/kurta1.jpg" },
-              { name: "Waistcoats", image: "/images/mens/coat1.jpg" },
-              { name: "Prince Coats", image: "/images/mens/princecoat2.jpg" },
-              { name: "Sherwani", image: "/images/F/product1.png" },
-              { name: "Shalwar & Trousers", image: "/images/F/product5.png" },
+              { name: "Kurta Shalwar", image: "/images/mens/kurta1.webp" },
+              { name: "Waistcoats", image: "/images/mens/coat1.webp" },
+              { name: "Prince Coats", image: "/images/mens/princecoat2.webp" },
+              { name: "Sherwani", image: "/images/F/product1.webp" },
+              { name: "Shalwar & Trousers", image: "/images/F/product5.webp" },
             ],
           },
         ],
@@ -49,7 +49,7 @@ export const mockCategories: Category[] = build([
   },
   {
     name: "Women",
-    icon: "/images/categories/women.png",
+    icon: "/images/categories/women.webp",
     tint: "#fde8df",
     children: [
       {
@@ -80,9 +80,9 @@ export const mockCategories: Category[] = build([
           {
             name: "Western",
             children: [
-              { name: "Co-ords", image: "/images/rangGhar/product6.png" },
-              { name: "Jackets & Knitwear", image: "/images/rangGhar/product1.png" },
-              { name: "Skirts", image: "/images/rangGhar/product4.png" },
+              { name: "Co-ords", image: "/images/rangGhar/product6.webp" },
+              { name: "Jackets & Knitwear", image: "/images/rangGhar/product1.webp" },
+              { name: "Skirts", image: "/images/rangGhar/product4.webp" },
             ],
           },
           {
@@ -102,39 +102,39 @@ export const mockCategories: Category[] = build([
   },
   {
     name: "Kids",
-    icon: "/images/categories/kids.png",
+    icon: "/images/categories/kids.webp",
     tint: "#d6e4fb",
     children: [
       {
         name: "Girls",
         children: [
-          { name: "Gharara & Sharara", slug: "gharara-sharara", image: "/images/kids/kids1.jpg" },
-          { name: "2 Piece", image: "/images/kids/kids3.jpg" },
-          { name: "3 Piece", image: "/images/kids/kids4.jpg" },
-          { name: "Co-ord Sets", image: "/images/kapraCo/product6.png" },
+          { name: "Gharara & Sharara", slug: "gharara-sharara", image: "/images/kids/kids1.webp" },
+          { name: "2 Piece", image: "/images/kids/kids3.webp" },
+          { name: "3 Piece", image: "/images/kids/kids4.webp" },
+          { name: "Co-ord Sets", image: "/images/kapraCo/product6.webp" },
         ],
       },
       {
         name: "Boys",
         children: [
-          { name: "Kameez Shalwar", image: "/images/kids/kids5.jpg" },
-          { name: "Kurta", image: "/images/kids/kids6.jpg" },
-          { name: "Casual Wear", image: "/images/kapraCo/product11.png" },
+          { name: "Kameez Shalwar", image: "/images/kids/kids5.webp" },
+          { name: "Kurta", image: "/images/kids/kids6.webp" },
+          { name: "Casual Wear", image: "/images/kapraCo/product11.webp" },
           { name: "Night Suits", image: "/images/kapraCo/product4.webp" },
         ],
       },
-      { name: "Footwear", image: "/images/kapraCo/product14.png" },
+      { name: "Footwear", image: "/images/kapraCo/product14.webp" },
     ],
   },
   {
     name: "Beauty",
-    icon: "/images/categories/beauty.png",
+    icon: "/images/categories/beauty.webp",
     tint: "#fdd9dd",
     children: [{ name: "Fragrances", image: "/images/kapraCo/product9.webp" }],
   },
   {
     name: "Jewelry",
-    icon: "/images/categories/jewelry.png",
+    icon: "/images/categories/jewelry.webp",
     tint: "#fdf2c4",
     children: [
       { name: "Necklaces" },

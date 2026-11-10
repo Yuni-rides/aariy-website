@@ -26,9 +26,9 @@ const initials = (full: string) =>
     .join("");
 
 const collage = [
-  { src: "/images/A/store-cover.png", alt: "Zarveen Couture campaign" },
-  { src: "/images/F/store-cover.png", alt: "Mehar Studio campaign" },
-  { src: "/images/E/store-cover.png", alt: "Sitara Zewar campaign" },
+  { src: "/images/A/store-cover.webp", alt: "Zarveen Couture campaign" },
+  { src: "/images/F/store-cover.webp", alt: "Mehar Studio campaign" },
+  { src: "/images/E/store-cover.webp", alt: "Sitara Zewar campaign" },
 ];
 
 export default function AboutPage() {

@@ -1,7 +1,7 @@
 import type { Brand } from "@/types";
 
 const logo = (folder: string, name: string, width: number, height: number) => ({
-  url: `/images/${folder}/logo.png`,
+  url: `/images/${folder}/logo.webp`,
   alt: `${name} logo`,
   width,
   height,
@@ -35,13 +35,13 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: ratings[1],
     cover: {
-      url: "/images/F/store-cover.png",
+      url: "/images/F/store-cover.webp",
       alt: "Mehar Studio campaign",
       width: 524,
       height: 734,
     },
     banner: {
-      url: "/images/F/banner.png",
+      url: "/images/F/banner.webp",
       alt: "Mehar Studio collection",
       width: 2195,
       height: 1049,
@@ -60,8 +60,8 @@ export const mockBrands: Brand[] = [
     city: "Hyderabad",
     productCount: 0,
     rating: ratings[2],
-    cover: { url: "/images/rangGhar/store-cover.png", alt: "Rang Ghar campaign", width: 524, height: 734 },
-    banner: { url: "/images/rangGhar/banner.png", alt: "Rang Ghar collection", width: 2306, height: 1101 },
+    cover: { url: "/images/rangGhar/store-cover.webp", alt: "Rang Ghar campaign", width: 524, height: 734 },
+    banner: { url: "/images/rangGhar/banner.webp", alt: "Rang Ghar collection", width: 2306, height: 1101 },
     logo: logo("rangGhar", "Rang Ghar", 2172, 724),
     wordmark: logo("rangGhar", "Rang Ghar", 2172, 724),
   },
@@ -76,8 +76,8 @@ export const mockBrands: Brand[] = [
     city: "Faisalabad",
     productCount: 0,
     rating: ratings[4],
-    cover: { url: "/images/kapraCo/store-cover.png", alt: "Kapra & Co campaign", width: 524, height: 734 },
-    banner: { url: "/images/kapraCo/banner.png", alt: "Kapra & Co collection", width: 2306, height: 1101 },
+    cover: { url: "/images/kapraCo/store-cover.webp", alt: "Kapra & Co campaign", width: 524, height: 734 },
+    banner: { url: "/images/kapraCo/banner.webp", alt: "Kapra & Co collection", width: 2306, height: 1101 },
   },
   {
     id: "br_07",
@@ -91,13 +91,13 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: { average: 4.7, count: 3200 },
     cover: {
-      url: "/images/A/store-cover.png",
+      url: "/images/A/store-cover.webp",
       alt: "Zarveen Couture campaign",
       width: 524,
       height: 734,
     },
     banner: {
-      url: "/images/A/banner.png",
+      url: "/images/A/banner.webp",
       alt: "Zarveen Couture collection",
       width: 1533,
       height: 734,
@@ -117,13 +117,13 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: { average: 4.6, count: 2100 },
     cover: {
-      url: "/images/B/store-cover.png",
+      url: "/images/B/store-cover.webp",
       alt: "Ruhaan Libas campaign",
       width: 524,
       height: 734,
     },
     banner: {
-      url: "/images/B/banner.png",
+      url: "/images/B/banner.webp",
       alt: "Ruhaan Libas collection",
       width: 1537,
       height: 734,
@@ -143,13 +143,13 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: { average: 4.8, count: 2700 },
     cover: {
-      url: "/images/C/store-cover.png",
+      url: "/images/C/store-cover.webp",
       alt: "Mahpara Couture campaign",
       width: 800,
       height: 1120,
     },
     banner: {
-      url: "/images/C/banner.png",
+      url: "/images/C/banner.webp",
       alt: "Mahpara Couture collection",
       width: 6144,
       height: 2936,
@@ -169,13 +169,13 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: { average: 4.7, count: 1900 },
     cover: {
-      url: "/images/D/store-cover.jpg",
+      url: "/images/D/store-cover.webp",
       alt: "Naqsh-e-Gul campaign",
       width: 600,
       height: 840,
     },
     banner: {
-      url: "/images/D/banner.png",
+      url: "/images/D/banner.webp",
       alt: "Naqsh-e-Gul collection",
       width: 5848,
       height: 2796,
@@ -195,13 +195,13 @@ export const mockBrands: Brand[] = [
     productCount: 0,
     rating: { average: 4.8, count: 1600 },
     cover: {
-      url: "/images/E/store-cover.png",
+      url: "/images/E/store-cover.webp",
       alt: "Sitara Zewar campaign",
       width: 524,
       height: 734,
     },
     banner: {
-      url: "/images/E/banner.png",
+      url: "/images/E/banner.webp",
       alt: "Sitara Zewar collection",
       width: 1536,
       height: 734,
