@@ -7,28 +7,16 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata(seoPages.about);
 
+/** The brand is written in capitals in About copy, e.g. "AARIEE". */
 const name = siteConfig.name;
 
-const pillars = [
-  {
-    title: "Verified brands only",
-    body: "Every store is checked by our team before it goes live, so you know who made what you're buying.",
-  },
-  {
-    title: "One basket, many brands",
-    body: "Pick a kurta from one label and jhumkas from another, then check out once.",
-  },
-  {
-    title: "Cash on delivery",
-    body: "Pay when your order arrives, or pay by card. We deliver across Pakistan.",
-  },
-  {
-    title: "A home for local labels",
-    body: "Small studios get a real storefront and reach shoppers they couldn't reach on their own.",
-  },
+const team = [
+  { name: "Joe Taj", role: "Chief Executive Officer" },
+  { name: "Faizan Abdul Latif", role: "Chief Operating Officer" },
+  { name: "Ifrah Qayyum", role: "Head of Department" },
+  { name: "Rida Ismail", role: "Brand Coordinator" },
+  { name: "Shazia Taj", role: "Digital Marketing Manager" },
 ];
-
-const team = ["Joe Taj", "Ifrah Qayyum", "Faizan Abdul Latif", "Rida Ismail"];
 
 const initials = (full: string) =>
   full
@@ -47,17 +35,30 @@ const collage = [
 export default function AboutPage() {
   return (
     <div className="container-site py-12 md:py-16">
-      {/* Intro */}
+      {/* About us */}
       <section className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">About us</p>
           <h1 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
-            Pakistani fashion, from the people who make it
+            Fashion Has No Borders. Neither Should Discovery.
           </h1>
-          <p className="mt-5 max-w-xl text-muted">
-            {name} is an online marketplace for verified Pakistani fashion brands. We bring clothing, jewelry and
-            accessories from independent labels into one place, so you can discover new designers and shop them all
-            in a single basket.
+          <div className="mt-5 flex max-w-xl flex-col gap-4 text-muted">
+            <p>
+              {name} is a US-based fashion marketplace bringing established names and emerging fashion brands together
+              in one destination.
+            </p>
+            <p>
+              We believe great fashion deserves to be discovered, no matter where it comes from. From unique designs
+              and timeless traditions to fresh trends and hidden gems, we&apos;re making it easier for fashion lovers
+              to explore styles they love.
+            </p>
+            <p>
+              But we&apos;re more than a place to shop. We&apos;re creating opportunities for smaller brands to reach
+              international audiences, connect with new customers and take their creativity beyond borders.
+            </p>
+          </div>
+          <p className="mt-6 font-display text-xl text-ink">
+            Different brands. Endless styles. One destination — {name}.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href={routes.brands()}>Explore brands</ButtonLink>
@@ -78,63 +79,74 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story */}
+      {/* Our story */}
       <section className="mx-auto mt-24 max-w-3xl text-center">
-        <h2 className="font-display text-3xl md:text-4xl">Our story</h2>
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Our story</p>
+        <h2 className="mt-3 font-display text-3xl md:text-4xl">Every Brand Has a Story. Every Style Has a Place.</h2>
         <div className="mt-6 flex flex-col gap-4 text-muted">
           <p>
-            It started with a simple problem. Some of the most beautiful clothes in Pakistan were being made in small
-            studios in Lahore, Karachi and Hyderabad, but finding them meant scrolling through dozens of Instagram
-            pages, sending DMs and hoping the order would arrive.
+            We started with a simple thought: Why should discovering fashion be limited to the brands we already know?
           </p>
           <p>
-            We wanted shopping local to feel as easy as shopping anywhere else. So we built {name}: one place where
-            trusted brands open their own store, and shoppers can browse, compare and order with confidence.
+            Behind every label is a dream, behind every design is creativity, and behind every small business is a
+            story waiting to be seen.
           </p>
           <p>
-            Today {name} is home to bridal couture, everyday kurtas, menswear and handmade jewelry, and we&apos;re
-            adding new labels every month.
+            We wanted to create a space where discovering a new brand feels just as exciting as finding an old
+            favourite.
+          </p>
+          <p>
+            That&apos;s why {name} was born — to bring brands closer to people, make fashion discovery exciting and
+            give emerging talent the opportunity to be seen beyond their local markets.
           </p>
         </div>
+        <p className="mt-8 font-display text-xl text-ink">
+          Because sometimes, your next favourite brand is one you&apos;ve never heard of.
+          <br />
+          And we want you to discover it first.
+        </p>
       </section>
 
-      {/* What we do */}
-      <section className="mt-24">
-        <h2 className="text-center font-display text-3xl md:text-4xl">What we do</h2>
-        <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((p, i) => (
-            <li key={p.title} className="rounded-card border border-line bg-surface p-6">
-              <span className="flex size-9 items-center justify-center rounded-full bg-accent text-sm font-semibold text-accent-ink">
-                {i + 1}
-              </span>
-              <h3 className="mt-4 text-lg font-semibold">{p.title}</h3>
-              <p className="mt-2 text-sm text-muted">{p.body}</p>
-            </li>
-          ))}
-        </ul>
+      {/* Our vision */}
+      <section className="mt-24 grid gap-10 rounded-panel border border-line bg-surface p-8 md:p-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Our vision</p>
+          <h2 className="mt-3 font-display text-3xl leading-tight md:text-4xl">Taking Creativity Beyond Borders.</h2>
+          <p className="mt-6 font-display text-xl text-ink">Small beginnings. Global possibilities.</p>
+        </div>
+        <div className="flex flex-col gap-4 text-muted">
+          <p>We envision a fashion world where location doesn&apos;t limit opportunity.</p>
+          <p>
+            Our goal is to connect fashion brands with international audiences, helping emerging designers grow,
+            established brands expand and customers discover styles from different parts of the world.
+          </p>
+          <p>
+            We want {name} to become a destination where creativity gets recognition, brands get opportunities and
+            fashion brings people together.
+          </p>
+        </div>
       </section>
 
       {/* Team */}
       <section className="mt-24">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl md:text-4xl">Meet the team</h2>
-          <p className="mt-4 text-muted">
-            A small team that loves fashion and wants to see Pakistani brands grow.
-          </p>
+          <p className="mt-4 text-muted">The people helping great brands get discovered.</p>
         </div>
-        <ul className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
+        <ul className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-5">
           {team.map((member) => (
             <li
-              key={member}
+              key={member.name}
               className="flex flex-col items-center rounded-card border border-line bg-surface px-4 py-8 text-center"
             >
               <span
                 aria-hidden
                 className="flex size-20 items-center justify-center rounded-full bg-subtle font-display text-2xl text-ink"
               >
-                {initials(member)}
+                {initials(member.name)}
               </span>
-              <p className="mt-4 font-semibold">{member}</p>
+              <p className="mt-4 font-semibold">{member.name}</p>
+              <p className="mt-1 text-sm text-muted">{member.role}</p>
             </li>
           ))}
         </ul>
@@ -144,7 +156,7 @@ export default function AboutPage() {
       <section className="mt-24 rounded-panel bg-[#272F39] px-6 py-12 text-center text-white md:px-12">
         <h2 className="font-display text-3xl md:text-4xl">Have a brand of your own?</h2>
         <p className="mx-auto mt-4 max-w-xl text-white/80">
-          Join {name} and sell to shoppers across Pakistan. Tell us about your business and we&apos;ll be in touch.
+          Join {name} and take your creativity beyond borders. Tell us about your business and we&apos;ll be in touch.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink href={routes.sellerRegister()}>Become a seller</ButtonLink>

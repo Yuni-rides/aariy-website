@@ -1,17 +1,5 @@
 import type { Brand } from "@/types";
 
-const banner = (name: string) => ({
-  url: "/images/brands/maria-b/banner.webp",
-  alt: `${name} collection`,
-  width: 1467,
-  height: 700,
-});
-const cover = (name: string, i: number) => ({
-  url: `/images/brands/maria-b/store-cover-${(i % 2) + 1}.webp`,
-  alt: `${name} campaign`,
-  width: 500,
-  height: 700,
-});
 const logo = (folder: string, name: string, width: number, height: number) => ({
   url: `/images/${folder}/logo.png`,
   alt: `${name} logo`,
@@ -30,20 +18,6 @@ const ratings = [
 
 /** The placeholder brands; products.ts generates four products for each of these. */
 export const seededBrands: Brand[] = [
-  {
-    id: "br_05",
-    slug: "kapra-co",
-    name: "Kapra & Co",
-    verified: true,
-    tagline: "Essentials, cut well.",
-    story:
-      "Kapra & Co focuses on wardrobe staples: straight trousers, simple kurtas and easy layers.",
-    city: "Faisalabad",
-    productCount: 0,
-    rating: ratings[4],
-    cover: cover("Kapra & Co", 4),
-    banner: banner("Kapra & Co"),
-  },
 ];
 
 /** Every store. Brands added below get their products from new-products.ts only. */
@@ -90,6 +64,20 @@ export const mockBrands: Brand[] = [
     banner: { url: "/images/rangGhar/banner.png", alt: "Rang Ghar collection", width: 2306, height: 1101 },
     logo: logo("rangGhar", "Rang Ghar", 2172, 724),
     wordmark: logo("rangGhar", "Rang Ghar", 2172, 724),
+  },
+  {
+    id: "br_05",
+    slug: "kapra-co",
+    name: "Kapra & Co",
+    verified: true,
+    tagline: "Kidswear, shoes and fragrances for the whole family.",
+    story:
+      "Kapra & Co makes comfortable clothes and shoes for kids, from festive kameez shalwar and co-ord sets to everyday sneakers, plus a small range of fragrances for grown-ups.",
+    city: "Faisalabad",
+    productCount: 0,
+    rating: ratings[4],
+    cover: { url: "/images/kapraCo/store-cover.png", alt: "Kapra & Co campaign", width: 524, height: 734 },
+    banner: { url: "/images/kapraCo/banner.png", alt: "Kapra & Co collection", width: 2306, height: 1101 },
   },
   {
     id: "br_07",

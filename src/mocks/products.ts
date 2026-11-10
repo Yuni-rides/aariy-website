@@ -277,7 +277,11 @@ function toProduct(entry: NewProduct, index: number): Product {
     material: entry.fabric,
     care: entry.category.startsWith("jewelry/")
       ? ["Keep away from water, perfume and lotions", "Wipe with a soft dry cloth after wearing", "Store in the box it came in"]
-      : ["Gentle wash in cold water", "Do not bleach", "Iron on reverse at medium heat"],
+      : entry.category.startsWith("beauty/")
+        ? ["Store in a cool, dry place away from sunlight", "Keep the cap closed when not in use", "For external use only"]
+        : entry.category.endsWith("/footwear")
+          ? ["Wipe clean with a damp cloth", "Air dry away from direct heat", "Do not machine wash"]
+          : ["Gentle wash in cold water", "Do not bleach", "Iron on reverse at medium heat"],
     dispatch: { minDays: 2, maxDays: 4 },
     isNew: entry.isNew ?? false,
     inStock: true,

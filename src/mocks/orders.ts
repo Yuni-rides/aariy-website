@@ -8,9 +8,11 @@ export const mockCustomer: Customer = {
   email: "ayesha@example.com",
 };
 
-const p1 = mockProducts[0];
-const p2 = mockProducts[5];
-const p3 = mockProducts[10];
+// Sample orders use women's pieces so the S/M/L sizes below always exist.
+const womens = mockProducts.filter((p) => p.audience === "women" && p.variants.some((v) => v.size === "M"));
+const p1 = womens[0];
+const p2 = womens[5];
+const p3 = womens[10];
 
 const line = (p: typeof p1, size: string, quantity = 1) => ({
   variantId: p.variants.find((v) => v.size === size)!.id,

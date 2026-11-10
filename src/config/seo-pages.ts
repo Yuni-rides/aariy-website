@@ -45,7 +45,7 @@ export const seoPages = {
   about: {
     title: "About Us",
     description:
-      "Aariy is an online marketplace for verified Pakistani fashion brands. Read our story and meet the team.",
+      "Aariee is a US-based fashion marketplace bringing established and emerging brands together in one destination. Read our story and meet the team.",
     path: "/about",
   },
   sellerRegister: {
