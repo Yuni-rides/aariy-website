@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, m } from "framer-motion";
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import type { ImageAsset } from "@/types";

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 import { StarIcon } from "@/components/icons";
 import { Breadcrumbs } from "@/components/ui";

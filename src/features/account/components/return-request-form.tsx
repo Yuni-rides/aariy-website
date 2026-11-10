@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import { useActionState } from "react";
 import { Button, ButtonLink, Field, Select, Textarea } from "@/components/ui";
 import { routes } from "@/config/routes";

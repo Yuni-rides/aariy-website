@@ -120,7 +120,7 @@ export const mockCategories: Category[] = build([
           { name: "Kameez Shalwar", image: "/images/kids/kids5.jpg" },
           { name: "Kurta", image: "/images/kids/kids6.jpg" },
           { name: "Casual Wear", image: "/images/kapraCo/product11.png" },
-          { name: "Night Suits", image: "/images/kapraCo/product4.png" },
+          { name: "Night Suits", image: "/images/kapraCo/product4.webp" },
         ],
       },
       { name: "Footwear", image: "/images/kapraCo/product14.png" },
@@ -130,7 +130,7 @@ export const mockCategories: Category[] = build([
     name: "Beauty",
     icon: "/images/categories/beauty.png",
     tint: "#fdd9dd",
-    children: [{ name: "Fragrances", image: "/images/kapraCo/product9.png" }],
+    children: [{ name: "Fragrances", image: "/images/kapraCo/product9.webp" }],
   },
   {
     name: "Jewelry",

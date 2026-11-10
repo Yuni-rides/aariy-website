@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui";
 import { routes } from "@/config/routes";

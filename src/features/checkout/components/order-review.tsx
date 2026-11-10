@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import { formatMoney, multiplyMoney } from "@/lib/money";
 import type { CartSellerGroup } from "@/types";
 

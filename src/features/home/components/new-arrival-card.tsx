@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 import { CartIcon, StarIcon } from "@/components/icons";
 import { routes } from "@/config/routes";

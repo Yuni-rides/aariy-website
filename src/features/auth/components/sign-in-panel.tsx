@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import { Logo } from "@/components/layout/logo";
 import { OtpLoginForm } from "./otp-login-form";
 

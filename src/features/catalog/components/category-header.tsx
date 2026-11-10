@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 import { Breadcrumbs, type Crumb } from "@/components/ui";
 import { categoryHref } from "@/lib/categories";

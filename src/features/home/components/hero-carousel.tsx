@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { StarIcon } from "@/components/icons";
