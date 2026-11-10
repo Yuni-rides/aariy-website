@@ -1,8 +1,8 @@
 import { env } from "./env";
 
 export const siteConfig = {
-  name: "Aariy",
-  legalName: "Aariy Marketplace",
+  name: "Aariee",
+  legalName: "Aariee Marketplace",
   tagline: "Verified South Asian fashion brands, one basket.",
   description:
     "Shop women's ready-to-wear from verified Pakistani fashion brands. Multi-brand basket, cash on delivery and card payments, delivered across Pakistan.",

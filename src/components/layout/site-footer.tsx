@@ -10,7 +10,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="mt-24 border-t border-line bg-surface pb-16 md:pb-0">
-      <div className="container-site grid gap-10 py-14 md:grid-cols-[1.5fr_repeat(3,1fr)]">
+      <div className="container-site grid gap-10 py-14 md:grid-cols-[1.5fr_repeat(4,1fr)]">
         <div className="max-w-xs">
           <Logo className="h-14" />
           <p className="mt-3 text-sm text-muted">{siteConfig.tagline}</p>

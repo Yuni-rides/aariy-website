@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "ghost" | "link";
+type Variant = "primary" | "secondary" | "tertiary" | "ghost" | "link";
 type Size = "sm" | "md" | "lg";
 
 const base =
@@ -13,6 +13,8 @@ const variants: Record<Variant, string> = {
   secondary: "border border-ink bg-transparent text-ink hover:bg-ink hover:text-bg",
   ghost: "text-ink hover:bg-subtle",
   link: "text-ink underline underline-offset-4 hover:text-accent",
+  tertiary: "border border-ink bg-white text-ink hover:bg-ink hover:text-bg",
+  
 };
 
 const sizes: Record<Size, string> = {

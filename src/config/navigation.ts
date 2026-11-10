@@ -35,6 +35,13 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     ],
   },
   {
+    title: "Company",
+    items: [
+      { label: "About Us", href: routes.about() },
+      { label: "Become a Seller", href: routes.sellerRegister() },
+    ],
+  },
+  {
     title: "Help",
     items: [
       { label: "Contact Us", href: routes.contact() },

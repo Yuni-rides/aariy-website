@@ -42,6 +42,12 @@ export const seoPages = {
       "Questions about an order or a brand? Send us a message and our support team will reply.",
     path: "/contact",
   },
+  about: {
+    title: "About Us",
+    description:
+      "Aariy is an online marketplace for verified Pakistani fashion brands. Read our story and meet the team.",
+    path: "/about",
+  },
   sellerRegister: {
     title: "Become a Seller",
     description:
