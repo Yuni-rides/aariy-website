@@ -10,11 +10,11 @@ export const metadata = buildMetadata(seoPages.about);
 const name = siteConfig.name;
 
 const team = [
-  { name: "Joe Taj", role: "Chief Executive Officer" },
-  { name: "Faizan Abdul Latif", role: "Chief Operating Officer" },
-  { name: "Ifrah Qayyum", role: "Head of Department" },
-  { name: "Rida Ismail", role: "Brand Coordinator" },
-  { name: "Shazia Taj", role: "Digital Marketing Manager" },
+  { name: "Joe Taj", role: "Founder & Chief Visionary Officer" },
+  { name: "Faizan Abdul Latif", role: "Head of Technology & Product Innovation" },
+  { name: "Ifrah Qayyum", role: "Head of Operational Excellence" },
+  { name: "Rida Ismail", role: "Head of Brand Experience & Identity" },
+  { name: "Shazia Taj", role: "Head of Digital Growth & Innovation" },
 ];
 
 const initials = (full: string) =>
@@ -34,7 +34,6 @@ const collage = [
 export default function AboutPage() {
   return (
     <div className="container-site py-12 md:py-16">
-      {/* About us */}
       <section className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-accent">
