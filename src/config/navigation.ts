@@ -65,5 +65,6 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
 
 export const accountNav: NavItem[] = [
   { label: "Overview", href: routes.account() },
+  { label: "My Profile", href: routes.profile() },
   { label: "Orders", href: routes.orders() },
 ];

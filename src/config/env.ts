@@ -18,3 +18,9 @@ export const mailEnv = {
 } as const;
 
 export const useMocks = env.dataSource === "mock";
+
+/**
+ * Sign-in can use the real API while the catalog is still mocked:
+ * set AUTH_SOURCE=api (and API_BASE_URL). Defaults to the data source.
+ */
+export const useMockAuth = (process.env.AUTH_SOURCE ?? env.dataSource) === "mock";

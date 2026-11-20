@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { routes } from "@/config/routes";
-import { clearSessionToken, setSessionToken } from "@/lib/session";
+import { clearSessionToken, setSession } from "@/lib/session";
 import { requestOtp, verifyOtp } from "@/services";
 
 export type OtpState =
@@ -48,9 +48,8 @@ export async function otpAction(
         error: email.error.issues[0].message,
       };
     try {
-      const { expiresInSeconds } = await requestOtp(email.data, {
-        newsletter: formData.get("newsletter") === "on",
-      });
+      // The OTP API takes only the email; the newsletter tick is not sent yet.
+      const { expiresInSeconds } = await requestOtp(email.data);
       return {
         step: "code",
         email: email.data,
@@ -74,8 +73,7 @@ export async function otpAction(
     return { ...prev, resent: false, error: "Enter the 6-digit code" };
 
   try {
-    const { token } = await verifyOtp(prev.email, code.data);
-    await setSessionToken(token);
+    await setSession(await verifyOtp(prev.email, code.data));
   } catch {
     return {
       ...prev,

@@ -19,12 +19,19 @@ export const endpoints = {
   brand: (slug: string) => `/v1/store/brands/${slug}`,
   brandShowcases: "/v1/store/brands/showcases",
   brandCollections: (slug: string) => `/v1/store/brands/${slug}/collections`,
+  /** Live on the backend; API_BASE_URL is the Postman {{baseUrl}}. */
   auth: {
-    /** POST { email, newsletter } → emails a 6-digit code. */
-    requestOtp: "/v1/store/auth/email-otp",
-    /** POST { email, code } → { token, customer }; creates the buyer on first sign-in. */
-    verifyOtp: "/v1/store/auth/email-otp/verify",
-    me: "/v1/store/me",
+    /** POST { email } → emails a one-time code. */
+    requestOtp: "/store/auth/otp/request",
+    /** POST { email, code } → access token and buyer; creates the buyer on first sign-in. */
+    verifyOtp: "/store/auth/otp/verify",
+    me: "/store/me",
+    /**
+     * POST { refreshToken } → new accessToken (and refreshToken).
+     * The route exists (401 "Session ended" for a bad token); the success shape
+     * is assumed to match verify ({ data: { accessToken, refreshToken, sessionExpiresAt } }).
+     */
+    refresh: "/store/auth/refresh",
   },
   checkout: "/v1/store/checkout",
   orders: "/v1/store/orders",

@@ -16,6 +16,7 @@ export const routes = {
   login: (next?: string) =>
     next ? `/login?next=${encodeURIComponent(next)}` : "/login",
   account: () => "/account",
+  profile: () => "/account/profile",
   orders: () => "/account/orders",
   order: (orderNumber: string) => `/account/orders/${orderNumber}`,
   orderReturn: (orderNumber: string) => `/account/orders/${orderNumber}/return`,

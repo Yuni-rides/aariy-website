@@ -4,7 +4,7 @@ import { SearchIcon, UserIcon } from "@/components/icons";
 import { routes } from "@/config/routes";
 import { siteConfig } from "@/config/site";
 import { WishlistLink } from "@/features/wishlist/components/wishlist-link";
-import { getSessionToken } from "@/lib/session";
+import { getCurrentCustomer } from "@/services";
 import { AccountLink } from "./account-link";
 import { IconNav } from "./icon-nav";
 import { Logo } from "./logo";
@@ -13,8 +13,13 @@ const pillButton =
   "relative inline-flex size-9 items-center justify-center rounded-full text-muted hover:bg-subtle hover:text-ink";
 
 async function SessionAccountLink() {
-  const signedIn = Boolean(await getSessionToken());
-  return <AccountLink signedIn={signedIn} className={pillButton} />;
+  const customer = await getCurrentCustomer();
+  return (
+    <AccountLink
+      customer={customer && { name: customer.name, email: customer.email }}
+      className={pillButton}
+    />
+  );
 }
 
 export function SiteHeader() {
