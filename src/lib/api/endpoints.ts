@@ -39,4 +39,11 @@ export const endpoints = {
   returns: (orderNumber: string) => `/v1/store/orders/${orderNumber}/returns`,
   supportTickets: "/v1/store/support/tickets",
   sellerApplications: "/v1/store/seller-applications",
+  /** Live on the backend; Become a seller signs the brand up straight away. */
+  sellerAuth: {
+    /** POST { email } → emails a 6-digit code. */
+    registerOtp: "/seller/auth/register/otp",
+    /** POST { fullName, email, phone, password, code, businessName, acceptTerms } → creates the seller. */
+    register: "/seller/auth/register",
+  },
 } as const;

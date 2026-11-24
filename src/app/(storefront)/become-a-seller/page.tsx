@@ -6,7 +6,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata(seoPages.sellerRegister);
 
 const steps = [
-  "Fill in this short form.",
+  "Verify your email with a one-time code and create your account.",
   "Our team calls you to learn about your brand.",
   "We set up your store and you start selling.",
 ];
